@@ -27,8 +27,8 @@ jobs:
         retention-days: 30
 
     - name: Attach artifacts on failure
-        uses: actions/upload-artifact@v3
-        if: failure()
+      uses: actions/upload-artifact@v3
+      if: failure()
       with:
         name: Artifacts
         path: test-results/
