@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import HomePage from "../../page_objects/homePage.js";
-import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT } from "../../helpers/testDataMainPage.js";
+import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT } from "../../helpers/testDataMainPage.js";
 
 test.describe('mainPage.spec', () => {
 	test.beforeEach(async ({ page }) => {
@@ -61,6 +61,63 @@ test.describe('mainPage.spec', () => {
 
 		await expect(homePage.locators.getCatalogBtn()).toBeVisible();
 		await expect(homePage.locators.getCatalogBtn()).toHaveCSS('cursor', 'pointer');
+
+	});
+
+	test('ТС.01.01.8 Verify that the site header contains the "Про нас" button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getAboutUsBtn()).toBeVisible();
+		await expect(homePage.locators.getAboutUsBtn()).toHaveText(ABOUT_US_BUTTON_TEXT);
+
+	});
+
+	test('ТС.01.01.9 Verify that the "Про нас" button has a pointer cursor', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getAboutUsBtn()).toBeVisible();
+		await expect(homePage.locators.getAboutUsBtn()).toHaveCSS('cursor', 'pointer');
+
+	});
+
+	test('ТС.01.01.10 Verify that the site header contains the "Контакти" button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getContactsBtn()).toBeVisible();
+		await expect(homePage.locators.getContactsBtn()).toHaveText(CONTACTS_BUTTON_TEXT);
+
+	});
+
+	test('ТС.01.01.11 Verify that the "Контакти" button has a pointer cursor', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getContactsBtn()).toBeVisible();
+		await expect(homePage.locators.getContactsBtn()).toHaveCSS('cursor', 'pointer');
+
+	});
+
+	test('ТС.01.01.12 Verify that the site header contains the "Кошик" button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getCartBtn()).toBeVisible();
+		await expect(homePage.locators.getCartBtn()).toContainText(CART_BUTTON_TEXT);
+
+	});
+
+	test('ТС.01.01.13 Verify that the "Кошик" button has a pointer cursor', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getCartBtn()).toBeVisible();
+		await expect(homePage.locators.getCartBtn()).toHaveCSS('cursor', 'pointer');
+
+	});
+
+	test('ТС.01.01.14 Verify that the "Main" page contains the "Новинки" section', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getNoveltiesSection()).toBeVisible();
+		await expect(homePage.locators.getNoveltiesSectionHeader()).toBeVisible();
+		await expect(homePage.locators.getNoveltiesSectionHeader()).toHaveText(NOVELTIES_SECTION_HEADER_TEXT);
 
 	});
 
