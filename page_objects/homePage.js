@@ -12,7 +12,10 @@ class HomePage {
 		getContactsBtn: () => this.page.getByRole('banner').getByRole('link', { name: 'Контакти' }),
 		getCartBtn: () => this.page.getByRole('link', { name: 'Кошик' }),
 		getNoveltiesSection: () => this.page.getByText('НовинкиФутболка з декоративними ...790 UAHФутболка Obsessed with fa...650 UAH'),
-		getNoveltiesSectionHeader: () => this.page.getByRole('heading', { name: 'Новинки' })
+		getNoveltiesSectionHeader: () => this.page.getByRole('heading', { name: 'Новинки' }),
+		getNoveltiesSectionPagination: () => this.page.locator('.swiper-pagination'),
+		getNextBtn: () => this.page.locator('button.sc-jPQKBn'),
+		getPrevBtn: () => this.page.locator('.sc-hnmNKk').last()
 
 	};
 
@@ -20,10 +23,15 @@ class HomePage {
 		await this.page.goto("/");
 	}
 
-	// async clickCatalogbutton() {
-	// 	await this.locators.getCatalogbutton().click();
-	// 	return this;
-	// }
+	async clickNextBtn() {
+		await this.locators.getNextBtn().click();
+		return this;
+	}
+
+	async clickPrevBtn() {
+		await this.locators.getPrevBtn().click();
+		return this;
+	}
 
 }
 
