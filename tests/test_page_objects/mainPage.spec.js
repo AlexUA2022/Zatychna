@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import HomePage from "../../page_objects/homePage.js";
-import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT } from "../../helpers/testDataMainPage.js";
+import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL  } from "../../helpers/testDataMainPage.js";
 
 test.describe('mainPage.spec', () => {
 	test.beforeEach(async ({ page }) => {
@@ -189,8 +189,82 @@ test.describe('mainPage.spec', () => {
 
 	});
 
+	LIST_BUTTONS_HEADER.forEach((namePage, indx) => {
+		test(`TC 02.01.21 Verify that the user can navigate to ${namePage} page by clicking on the appropriate button in the of website header`, async ({ page }) => {
+			const homePage = new HomePage(page);
 
+			await homePage.clickBtnHeader(namePage);
 
-	
+			await expect(page).toHaveURL(BASE_URL + LIST_BUTTONS_PAGES_URLs_END_POINTS[indx]);
+			await expect(page.getByRole('main').getByRole('link', { name: namePage })).toHaveText(namePage);
+
+		})
+
+	});
+
+	test('ТС.01.01.21.1 Verify that the user can navigate to "Головна"  page by clicking on the appropriate button in the of website header', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		const contactsPage = await homePage.clickgetContactsBtn();
+
+		await expect(page).toHaveURL(CONTACTS_URL);
+		await expect(contactsPage.locators.getContactsPageHeader()).toBeVisible();
+		await expect(contactsPage.locators.getContactsPageHeader()).toHaveText(CONTACTS_PAGE_HEADER_TEXT);
+
+		await contactsPage.clickGolovnaBtn();
+
+		await expect(page).toHaveURL(BASE_URL);
+
+	});
+
+	test('ТС.01.01.22 Verify that the user can navigate to "Головна" page by clicking on the breadcrumbs on the "Контакти" page', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		const contactsPage = await homePage.clickgetContactsBtn();
+		await expect(page).toHaveURL(CONTACTS_URL);
+		await expect(contactsPage.locators.getContactsPageHeader()).toBeVisible();
+		await expect(contactsPage.locators.getContactsPageHeader()).toHaveText(CONTACTS_PAGE_HEADER_TEXT);
+
+		await contactsPage.clickContactsPageBreadcrumbs();
+
+		await expect(page).toHaveURL(BASE_URL);
+
+	});
+
+	test('ТС.01.01.23 Verify that the "Main" page contains the "Каталог" (black) button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getCatalogBlackBtn()).toBeVisible();
+		await expect(homePage.locators.getCatalogBlackBtn()).toHaveText(CATALOG_BUTTON_BLACK_TEXT);
+
+	});
+
+	test('ТС.01.01.24 Verify that the "Каталог" (black) button has a pointer cursor', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getCatalogBlackBtn()).toBeVisible();
+		await expect(homePage.locators.getCatalogBlackBtn()).toHaveCSS('cursor', 'pointer');
+
+	});
+
+	test('ТС.01.01.25 Verify that the "Каталог" page opens after clicking on the "Каталог" (black) button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		const catalogPage = await homePage.clickCatalogBlackBtn();
+
+		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toBeVisible();
+		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toHaveText(CATALOG_BUTTON_BLACK_TEXT);
+		await expect(page).toHaveURL(CATALOG_URL);
+
+	});
+
+	test('ТС.01.01.25.1 Verify that the "Каталог" (black) button is colored black', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getCatalogBlackBtn()).toBeVisible();
+		await expect(homePage.locators.getCatalogBlackBtn()).toHaveCSS('background', 'rgb(22, 11, 3) none repeat scroll 0% 0% / auto padding-box border-box');
+
+	});
+
 })
 
