@@ -52,6 +52,70 @@ test.describe('catalogPage.spec', () => {
     };
     });
 
+    test('TC 02.01.6 Verify that the  page contains the "Всi" button',async ({ page }) => {
+        const catalogPage = new CatalogPage(page);
+        await expect(catalogPage.locators.getAllBtn()).toBeVisible();
+        await expect(catalogPage.locators.getAllBtn()).toHaveText('Всі');
+        await expect(catalogPage.locators.getAllBtn()).toHaveCSS('cursor', 'pointer');
+        await expect(catalogPage.locators.getAllBtn()).toHaveCSS('background', 'rgb(22, 11, 3) none repeat scroll 0% 0% / auto padding-box border-box');
+    });
 
+    test('TC 02.01.7 Verify that the page contains a "Футболки" button', async ({ page }) => {
+        const catalogPage = new CatalogPage(page);
+        await expect(catalogPage.locators.getTshirtsBtn()).toBeVisible();
+        await expect(catalogPage.locators.getTshirtsBtn()).toHaveText('Футболки');
+        await expect(catalogPage.locators.getTshirtsBtn()).toHaveCSS('cursor', 'pointer');
+        await expect(catalogPage.locators.getTshirtsBtn()).toHaveCSS('border', '1px solid rgb(22, 11, 3)');
+
+    });
+
+    test('TC 02.01.8 Verify that the page contains a "Костюми" button', async ({ page }) => {
+        const catalogPage = new CatalogPage(page);
+        await expect(catalogPage.locators.getSuitsBtn()).toBeVisible();
+        await expect(catalogPage.locators.getSuitsBtn()).toHaveText('Костюми');
+        await expect(catalogPage.locators.getSuitsBtn()).toHaveCSS('cursor', 'pointer');
+        await expect(catalogPage.locators.getSuitsBtn()).toHaveCSS('border', '1px solid rgb(22, 11, 3)');
 });
 
+test('TC 02.01.8 Verify that the page contains a "Свiтоши" button', async ({ page }) => {
+    const catalogPage = new CatalogPage(page);
+    await expect(catalogPage.locators.getHoodiesBtn()).toBeVisible();
+    await expect(catalogPage.locators.getHoodiesBtn()).toHaveText('Світшоти');
+    await expect(catalogPage.locators.getHoodiesBtn()).toHaveCSS('cursor', 'pointer');
+    await expect(catalogPage.locators.getHoodiesBtn()).toHaveCSS('border', '1px solid rgb(22, 11, 3)');
+});
+test('TC 02.01.9 Verify that the page contains a "Худі" button', async ({ page }) => {
+    const catalogPage = new CatalogPage(page);
+    await expect(catalogPage.locators.getHoodiessBtn()).toBeVisible();
+    await expect(catalogPage.locators.getHoodiessBtn()).toHaveText('Худі');
+    await expect(catalogPage.locators.getHoodiessBtn()).toHaveCSS('cursor', 'pointer');
+    await expect(catalogPage.locators.getHoodiessBtn()).toHaveCSS('border', '1px solid rgb(22, 11, 3)');
+});
+
+test('TC 02.01.10 Verify that the page contains a "Штани" button', async ({ page }) => {
+    const catalogPage = new CatalogPage(page);
+    await expect(catalogPage.locators.getPantsBtn()).toBeVisible();
+    await expect(catalogPage.locators.getPantsBtn()).toHaveText('Штани');
+    await expect(catalogPage.locators.getPantsBtn()).toHaveCSS('cursor', 'pointer');
+    await expect(catalogPage.locators.getPantsBtn()).toHaveCSS('border', '1px solid rgb(22, 11, 3)');
+});
+
+test('TC 02.01.11 Verify that the page contains a "Спідниці" button', async ({ page }) => {
+    const catalogPage = new CatalogPage(page);
+    await expect(catalogPage.locators.getSkirtBtn()).toBeVisible();
+    await expect(catalogPage.locators.getSkirtBtn()).toHaveText('Спідниці');
+    await expect(catalogPage.locators.getSkirtBtn()).toHaveCSS('cursor', 'pointer');
+    await expect(catalogPage.locators.getSkirtBtn()).toHaveCSS('border', '1px solid rgb(22, 11, 3)');
+});
+
+test('TC 02.01.11 Verify that the page contains a Сукні" button', async ({ page }) => {
+    const catalogPage = new CatalogPage(page);
+    await expect(catalogPage.locators.getDressesBtn()).toBeVisible();
+    await expect(catalogPage.locators.getDressesBtn()).toHaveText('Сукні');
+    await expect(catalogPage.locators.getDressesBtn()).toHaveCSS('cursor', 'pointer');
+    await expect(catalogPage.locators.getDressesBtn()).toHaveCSS('border', '1px solid rgb(22, 11, 3)');
+});
+
+
+
+});
