@@ -15,6 +15,15 @@ class CatalogPage {
 		getPantsBtn: () => this.page.getByRole('button', { name: 'Штани' }),
 		getSkirtBtn: () => this.page.getByRole('button', { name: 'Спідниці' }),
 		getDressesBtn: () => this.page.getByRole('button', { name: 'Сукні' }),
+		getShortsBtn: () => this.page.getByRole('button', { name: 'Шорти' }),
+		getShirtsBtn: () => this.page.getByRole('button', { name: 'Сорочки' }),
+		getBlousesBtn: () => this.page.getByRole('button', { name: 'Блузи' }),
+		getTopsBtn: () => this.page.getByRole('button', { name: 'Топи' }),
+		getOuterwearBtn: () => this.page.getByRole('button', { name: 'Верхній одяг' }),
+		getProductCardsBlock: () => this.page.locator('.gnbinI'),
+
+
+
 
 
 	};
