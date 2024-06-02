@@ -108,7 +108,7 @@ test('TC 02.01.11 Verify that the page contains a "Спідниці" button', as
     await expect(catalogPage.locators.getSkirtBtn()).toHaveCSS('border', '1px solid rgb(22, 11, 3)');
 });
 
-test('TC 02.01.11 Verify that the page contains a Сукні" button', async ({ page }) => {
+test('TC 02.01.11 Verify that the page contains a "Сукні" button', async ({ page }) => {
     const catalogPage = new CatalogPage(page);
     await expect(catalogPage.locators.getDressesBtn()).toBeVisible();
     await expect(catalogPage.locators.getDressesBtn()).toHaveText('Сукні');
@@ -116,6 +116,83 @@ test('TC 02.01.11 Verify that the page contains a Сукні" button', async ({ 
     await expect(catalogPage.locators.getDressesBtn()).toHaveCSS('border', '1px solid rgb(22, 11, 3)');
 });
 
+test('TC 02.01.12.1 Verify that the page contains a "Шорти" button', async ({ page }) => {
+    const catalogPage = new CatalogPage(page);
+    await expect(catalogPage.locators.getShortsBtn()).toBeVisible();
+    await expect(catalogPage.locators.getShortsBtn()).toHaveText('Шорти');
+    await expect(catalogPage.locators.getShortsBtn()).toHaveCSS('cursor', 'pointer');
+    await expect(catalogPage.locators.getShortsBtn()).toHaveCSS('border', '1px solid rgb(22, 11, 3)');
+});
+test('TC 02.01.12.2 Verify that the page contains a "Сорочки" button', async ({ page }) => {
+    const catalogPage = new CatalogPage(page);
+    await expect(catalogPage.locators.getShirtsBtn()).toBeVisible();
+    await expect(catalogPage.locators.getShirtsBtn()).toHaveText('Сорочки');
+    await expect(catalogPage.locators.getShirtsBtn()).toHaveCSS('cursor', 'pointer');
+    await expect(catalogPage.locators.getShirtsBtn()).toHaveCSS('border', '1px solid rgb(22, 11, 3)');
+});
+
+test('TC 02.01.12.3 Verify that the page contains a "Блузи" button', async ({ page }) => {
+    const catalogPage = new CatalogPage(page);
+    await expect(catalogPage.locators.getBlousesBtn()).toBeVisible();
+    await expect(catalogPage.locators.getBlousesBtn()).toHaveText('Блузи');
+    await expect(catalogPage.locators.getBlousesBtn()).toHaveCSS('cursor', 'pointer');
+    await expect(catalogPage.locators.getBlousesBtn()).toHaveCSS('border', '1px solid rgb(22, 11, 3)');
+});
+
+test('TC 02.01.12.4 Verify that the page contains a "Топи" button', async ({ page }) => {
+    const catalogPage = new CatalogPage(page);
+    await expect(catalogPage.locators.getTopsBtn()).toBeVisible();
+    await expect(catalogPage.locators.getTopsBtn()).toHaveText('Топи');
+    await expect(catalogPage.locators.getTopsBtn()).toHaveCSS('cursor', 'pointer');
+    await expect(catalogPage.locators.getTopsBtn()).toHaveCSS('border', '1px solid rgb(22, 11, 3)');
+});
+
+test('TC 02.01.12.5Verify that the page contains a "Верхній одяг" button', async ({ page }) => {
+    const catalogPage = new CatalogPage(page);
+    await expect(catalogPage.locators.getOuterwearBtn()).toBeVisible();
+    await expect(catalogPage.locators.getOuterwearBtn()).toHaveText('Верхній одяг');
+    await expect(catalogPage.locators.getOuterwearBtn()).toHaveCSS('cursor', 'pointer');
+    await expect(catalogPage.locators.getOuterwearBtn()).toHaveCSS('border', '1px solid rgb(22, 11, 3)');
+});
+
+test('TC 02.01.14 Verify that the page displays 12 product cards', async ({ page }) => {
+    const catalogPage = new CatalogPage(page);
+    const productCards = await page.$$('.btjUef');
+    for(const card of productCards){
+    await expect(productCards).toHaveLength(12);
+    }
+});
+
+test('TC 02.01.15 Verify that the product card contains the product name', async ({ page }) => {
+    const catalogPage = new CatalogPage(page);
+    const productCards = await page.$$('.btjUef');
+    for(const card of productCards){
+    await expect(productCards).toHaveLength(12);
+    }
+
+    for (const card of productCards) {
+
+        const productName = await card.$('.jgqDOh');
+        expect(productName).not.toBeNull();
+
+    }
+
+});
+test('TC 02.01.15 Verify that the product card contains the product price', async ({ page }) => {
+    const catalogPage = new CatalogPage(page);
+    const productCards = await page.$$('.btjUef');
+    for(const card of productCards){
+    await expect(productCards).toHaveLength(12);
+    }
+
+    for (const card of productCards) {
+
+        const productName = await card.$('.jgqDOh');
+        expect(productName).not.toBeNull();
+
+    }
+
+});
 
 
 });
