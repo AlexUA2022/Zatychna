@@ -1,3 +1,6 @@
+import CatalogPage from "./catalogPage";
+import ContactsPage from "./contactsPage";
+
 class HomePage {
 	constructor(page) {
 		this.page = page;
@@ -15,7 +18,9 @@ class HomePage {
 		getNoveltiesSectionHeader: () => this.page.getByRole('heading', { name: 'Новинки' }),
 		getNoveltiesSectionPagination: () => this.page.locator('.swiper-pagination'),
 		getNextBtn: () => this.page.locator('button.sc-jPQKBn'),
-		getPrevBtn: () => this.page.locator('.sc-hnmNKk').last()
+		getPrevBtn: () => this.page.locator('.sc-hnmNKk').last(),
+		getButtonsHeader: (pageName) => this.page.getByRole('banner').getByRole('link', { name: pageName}),
+		getCatalogBlackBtn: () => this.page.getByRole('main').getByRole('link', { name: 'Каталог' })
 
 	};
 
@@ -31,6 +36,21 @@ class HomePage {
 	async clickPrevBtn() {
 		await this.locators.getPrevBtn().click();
 		return this;
+	}
+
+	async clickBtnHeader(pageName) {
+		await this.locators.getButtonsHeader(pageName).click();
+		return this;
+	}
+
+	async clickgetContactsBtn() {
+		await this.locators.getContactsBtn().click();
+		return new ContactsPage(this.page);
+	}
+
+	async clickCatalogBlackBtn() {
+		await this.locators.getCatalogBlackBtn().click();
+		return new CatalogPage(this.page);
 	}
 
 }
