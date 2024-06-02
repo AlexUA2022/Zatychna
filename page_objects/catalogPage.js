@@ -4,14 +4,16 @@ class CatalogPage {
 	}
 
 	locators = {
-		getCatalogBreadcrumbs: () => this.page.getByRole('main').getByRole('link', { name: 'Каталог' })
+		getCatalogBreadcrumbs: () => this.page.getByRole('main').getByRole('link', { name: 'Каталог' }),
+		getDropdownSorting: () => this.page.getByRole('button', { name: 'Сортування за ціною: від вищої до нижчої' }),
+		getDropdownSortingDown: () => this.page.locator('li').filter({ hasText: 'Сортування за ціною: від нижчої до вищої' })
 
 	};
 
-	// async clickGolovnaBtn() {
-	// 	await this.locators.getGolovnaBtn().click();
-	// 	return new HomePage(this.page);
-	// }
+	async clickDropdownSorting() {
+		await this.locators.getDropdownSorting().click();
+
+	}
 
 }
 
