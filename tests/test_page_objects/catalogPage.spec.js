@@ -194,5 +194,51 @@ test('TC 02.01.15 Verify that the product card contains the product price', asyn
 
 });
 
+test('TC 02.01.17 Verify that the page contains pagination', async ({ page }) => {
+    const catalogPage = new CatalogPage(page);
+    await expect(catalogPage.locators.getPagination()).toBeVisible();
+
+});
+
+test('TC 02.01.19 Verify that the user can switch pages forward ">"', async ({ page }) => {
+    const catalogPage = new CatalogPage(page);
+    await catalogPage.clickSwitchPagesForward();
+    await catalogPage.clickSwitchPagesForward();
+    await catalogPage.clickSwitchPagesForward();
+    await catalogPage.clickSwitchPagesForward();
+    await catalogPage.clickSwitchPagesForward();
+    await catalogPage.clickSwitchPagesForward();
+    await catalogPage.clickSwitchPagesForward();
+    expect(catalogPage.locators.getSwitchPagesForward()).not.toBeVisible();
+
+});
+
+test('TC 02.01.20 Verify that the user can switch pages forward "<"', async ({ page }) => {
+    const catalogPage = new CatalogPage(page);
+    await catalogPage.clickSwitchPagesForward();
+    await catalogPage.clickSwitchPagesForward();
+    await catalogPage.clickSwitchPagesForward();
+    await catalogPage.clickSwitchPagesForward();
+    await catalogPage.clickSwitchPagesForward();
+    await catalogPage.clickSwitchPagesForward();
+    await catalogPage.clickSwitchPagesForward();
+    await catalogPage.clickBackPagesForward();
+    await catalogPage.clickBackPagesForward();
+    await catalogPage.clickBackPagesForward();
+    await catalogPage.clickBackPagesForward();
+    await catalogPage.clickBackPagesForward();
+    await catalogPage.clickBackPagesForward();
+    await catalogPage.clickBackPagesForward();
+    expect(catalogPage.locators.getBackPagesForward()).not.toBeVisible();
+
+});
+
+test('TC 02.01.21 Verify that the user can switch by clicking on the pagination numbers', async ({ page }) => {
+    const catalogPage = new CatalogPage(page);
+    await catalogPage.clickLastPagePangination();
+    await expect(catalogPage.locators.getLastPagePangination()).toBeVisible();
+})
+
+
 
 });
