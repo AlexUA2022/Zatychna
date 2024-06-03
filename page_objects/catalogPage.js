@@ -24,7 +24,10 @@ class CatalogPage {
 		getOuterwearBtn: () => this.page.getByRole('button', { name: 'Верхній одяг' }),
 		getProductCardsBlock: () => this.page.locator('.gnbinI'),
 		getLogo: () => this.page.getByRole('banner').getByRole('link', { name: 'Zatyshna' }),
-
+		getPagination: () => this.page.locator('div').filter({ hasText: /^12345678$/ }),
+		getSwitchPagesForward:  () => this.page.locator('button:nth-child(3)'),
+		getLastPagePangination: () => this.page.getByRole('button', { name: '8' }),
+		getBackPagesForward: () => this.page.locator('.sc-dxfSRF').first()
 
 
 
@@ -39,6 +42,18 @@ class CatalogPage {
 	async clickLogo() {
 		await this.locators.getLogo().click();
 		return new HomePage(this.page);
+	}
+
+	async clickSwitchPagesForward() {
+		await this.locators.getSwitchPagesForward().click()
+	}
+
+	async clickBackPagesForward() {
+		await this.locators.getBackPagesForward().click()
+	}
+
+	async clickLastPagePangination() {
+		await this.locators.getLastPagePangination().click()
 	}
 
 }
