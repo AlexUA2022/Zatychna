@@ -1,4 +1,5 @@
 import HomePage from "./homePage";
+import QuiltedJacketPage from "./guiltedJacket";
 
 class CatalogPage {
 	constructor(page) {
@@ -27,7 +28,8 @@ class CatalogPage {
 		getPagination: () => this.page.locator('div').filter({ hasText: /^12345678$/ }),
 		getSwitchPagesForward:  () => this.page.locator('button:nth-child(3)'),
 		getLastPagePangination: () => this.page.getByRole('button', { name: '8' }),
-		getBackPagesForward: () => this.page.locator('.sc-dxfSRF').first()
+		getBackPagesForward: () => this.page.locator('.sc-dxfSRF').first(),
+		getJacketProduct: () => this.page.getByRole('link', { name: 'Куртка Quilted з капюшоно...' })
 
 
 
@@ -54,6 +56,11 @@ class CatalogPage {
 
 	async clickLastPagePangination() {
 		await this.locators.getLastPagePangination().click()
+	}
+
+	async clickJacketProduct() {
+		await this.locators.getJacketProduct().click();
+		return new QuiltedJacketPage(this.page);
 	}
 
 }
