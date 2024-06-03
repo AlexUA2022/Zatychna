@@ -18,15 +18,19 @@ export const LIST_BUTTONS_HEADER = ['Каталог', 'Про нас', 'Конт
 export const SEARCH_MESSAGE_TEXT = 'За запитом нічого не знайдено!';
 export const CATEGORY_SECTION_HEADER_TEXT = 'Категорії';
 
-
 export const LIST_BUTTONS_PAGES_URLs_END_POINTS = [
 	'/catalog',
 	'/about',
 	'/contacts'
 ];
 
-
-
+export const expectedCategoryNames = [
+	'Футболки',
+	'Костюми',
+	'Світшоти',
+	'Худі',
+	'Штани'
+];
 
 //login  credential
 
