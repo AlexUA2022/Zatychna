@@ -1,3 +1,5 @@
+import HomePage from "./homePage";
+
 class CatalogPage {
 	constructor(page) {
 		this.page = page;
@@ -11,7 +13,7 @@ class CatalogPage {
 		getTshirtsBtn: () =>  this.page.getByRole('button', { name: 'Футболки' }),
 		getSuitsBtn: () =>  this.page.getByRole('button', { name: 'Костюми' }),
 		getHoodiesBtn: () => this.page.getByRole('button', { name: 'Світшоти' }),
-        getHoodiessBtn: () => this.page.getByRole('button', { name: 'Худі' }),
+      getHoodiessBtn: () => this.page.getByRole('button', { name: 'Худі' }),
 		getPantsBtn: () => this.page.getByRole('button', { name: 'Штани' }),
 		getSkirtBtn: () => this.page.getByRole('button', { name: 'Спідниці' }),
 		getDressesBtn: () => this.page.getByRole('button', { name: 'Сукні' }),
@@ -21,6 +23,7 @@ class CatalogPage {
 		getTopsBtn: () => this.page.getByRole('button', { name: 'Топи' }),
 		getOuterwearBtn: () => this.page.getByRole('button', { name: 'Верхній одяг' }),
 		getProductCardsBlock: () => this.page.locator('.gnbinI'),
+		getLogo: () => this.page.getByRole('banner').getByRole('link', { name: 'Zatyshna' }),
 
 
 
@@ -30,7 +33,12 @@ class CatalogPage {
 
 	async clickDropdownSorting() {
 		await this.locators.getDropdownSorting().click();
+		return this;
+	}
 
+	async clickLogo() {
+		await this.locators.getLogo().click();
+		return new HomePage(this.page);
 	}
 
 }

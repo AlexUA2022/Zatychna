@@ -20,7 +20,12 @@ class HomePage {
 		getNextBtn: () => this.page.locator('button.sc-jPQKBn'),
 		getPrevBtn: () => this.page.locator('.sc-hnmNKk').last(),
 		getButtonsHeader: (pageName) => this.page.getByRole('banner').getByRole('link', { name: pageName}),
-		getCatalogBlackBtn: () => this.page.getByRole('main').getByRole('link', { name: 'Каталог' })
+		getCatalogBlackBtn: () => this.page.getByRole('main').getByRole('link', { name: 'Каталог' }),
+		getSearchBtn: () => this.page.getByRole('banner').getByRole('button'),
+		getIconCartBtn: () => this.page.locator('.sc-ifysJV'),
+		getSearchField: () => this.page.getByRole('banner').locator('form'),
+		getSearchFieldPlaceholder: () => this.page.getByPlaceholder('Шукати'),
+		getSearchFieldPlaceholderIcon: () => this.page.locator('svg[type="input"]'),
 
 	};
 
@@ -52,6 +57,16 @@ class HomePage {
 		await this.locators.getCatalogBlackBtn().click();
 		return new CatalogPage(this.page);
 	}
+
+	async clickSearchBtn() {
+		await this.locators.getSearchBtn().click();
+		return this;
+	}
+
+	async typeSearchField() {
+		await this.locators.getSearchField().type('a');
+	}
+
 
 }
 
