@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import HomePage from "../../page_objects/homePage.js";
-import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL } from "../../helpers/testDataMainPage.js";
+import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL, SEARCH_MESSAGE_TEXT, CATEGORY_SECTION_HEADER_TEXT } from "../../helpers/testDataMainPage.js";
 
 test.describe('mainPage.spec', () => {
 	test.beforeEach(async ({ page }) => {
@@ -330,6 +330,80 @@ test.describe('mainPage.spec', () => {
 		await expect(homePage.locators.getSearchField()).toBeVisible();
 
 	});
+
+	test('ТС.01.01.26.5 Verify that the search field contains the "X" (close) button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.clickSearchBtn();
+
+		await expect(homePage.locators.getSearchFieldCrossBtn()).toBeVisible();
+
+	});
+
+	test('ТС.01.01.26.6 Verify that the "X" (close) button has a pointer cursor', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.clickSearchBtn();
+
+		await expect(homePage.locators.getSearchFieldCrossBtn()).toBeVisible();
+		await expect(homePage.locators.getSearchFieldCrossBtn()).toHaveCSS('cursor', 'pointer');
+
+	});
+
+	test('ТС.01.01.26.7 Verify that the search field is closed after clicking on the "X" (close) button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.clickSearchBtn();
+		await expect(homePage.locators.getSearchField()).toBeVisible();
+
+		await homePage.clickSearchFieldCrossBtn();
+
+		await expect(homePage.locators.getSearchField()).not.toBeVisible();
+
+	});
+
+	test('ТС.01.01.26.8 Verify that the dropdown of the found goods opens after entering valid "фут" data', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.clickSearchBtn();
+		await homePage.typeSearchFieldValidData();
+
+		await expect(homePage.locators.getDropdownValidData()).toBeVisible();
+
+	});
+
+	test('ТС.01.01.26.9 Verify that the "За запитом нічого не знайдено!" message appears under the search field after entering invalid "арб" data', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.clickSearchBtn();
+		await homePage.typeSearchFieldInvalidData();
+
+		await expect(homePage.locators.getDropdownValidData()).toBeVisible();
+		await expect(homePage.locators.getSearchMessage()).toBeVisible();
+		await expect(homePage.locators.getSearchMessage()).toHaveText(SEARCH_MESSAGE_TEXT);
+
+	});
+
+	test('ТС.01.01.27 Verify that the "Main" page contains the "Категории" section', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getCategorySection()).toBeVisible();
+		await expect(homePage.locators.getCategorySectionHeader()).toBeVisible();
+		await expect(homePage.locators.getCategorySectionHeader()).toHaveText(CATEGORY_SECTION_HEADER_TEXT);
+
+	});
+
+	test('ТС.01.01.28 Verify that the "Категории" section contains images of categories', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getT_ShirtsCategory()).toBeVisible();
+		await expect(homePage.locators.getSuitsCategory()).toBeVisible();
+		await expect(homePage.locators.getSweatshirtsCategory()).toBeVisible();
+		await expect(homePage.locators.getHoodieCategory()).toBeVisible();
+		await expect(homePage.locators.getPantsCategory()).toBeVisible();
+
+	});
+
 
 })
 

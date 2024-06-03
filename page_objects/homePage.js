@@ -26,6 +26,16 @@ class HomePage {
 		getSearchField: () => this.page.getByRole('banner').locator('form'),
 		getSearchFieldPlaceholder: () => this.page.getByPlaceholder('Шукати'),
 		getSearchFieldPlaceholderIcon: () => this.page.locator('svg[type="input"]'),
+		getSearchFieldCrossBtn: () => this.page.getByRole('banner').getByRole('button').first(),
+		getDropdownValidData: () => this.page.locator('.sc-ckdFFX'),
+		getSearchMessage: () => this.page.getByText('За запитом нічого не знайдено!'),
+		getCategorySection: () => this.page.getByText('КатегоріїФутболкиКостюмиСвітшотиХудіШтаниПоказати більше'),
+		getCategorySectionHeader: () => this.page.getByRole('heading', { name: 'Категорії' }),
+		getT_ShirtsCategory: () => this.page.getByRole('link', { name: 'Футболки' }),
+		getSuitsCategory: () => this.page.getByRole('link', { name: 'Костюми' }),
+		getSweatshirtsCategory: () => this.page.getByRole('link', { name: 'Світшоти' }),
+		getHoodieCategory: () => this.page.getByRole('link', { name: 'Худі', exact: true }),
+		getPantsCategory: () => this.page.getByRole('link', { name: 'Штани' })
 
 	};
 
@@ -67,6 +77,18 @@ class HomePage {
 		await this.locators.getSearchField().type('a');
 	}
 
+	async clickSearchFieldCrossBtn() {
+		await this.locators.getSearchFieldCrossBtn().click();
+		return this;
+	}
+
+	async typeSearchFieldValidData() {
+		await this.locators.getSearchField().type('фут');
+	}
+
+	async typeSearchFieldInvalidData() {
+		await this.locators.getSearchField().type('арб');
+	}
 
 }
 

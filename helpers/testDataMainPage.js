@@ -3,6 +3,7 @@ export const BASE_URL = 'https://clothing-store-app.vercel.app';
 export const CONTACTS_URL = 'https://clothing-store-app.vercel.app/contacts';
 export const CATALOG_URL = 'https://clothing-store-app.vercel.app/catalog';
 
+
 //test data
 export const GOLOVNA_BUTTON_TEXT = 'Головна';
 export const CATALOG_BUTTON_TEXT = 'Каталог';
@@ -14,6 +15,8 @@ export const CONTACTS_PAGE_HEADER_TEXT = 'Контакти';
 export const CATALOG_BUTTON_BLACK_TEXT = 'Каталог';
 export const CATALOG_BREADCRUMBS_TEXT = 'Каталог';
 export const LIST_BUTTONS_HEADER = ['Каталог', 'Про нас', 'Контакти'];
+export const SEARCH_MESSAGE_TEXT = 'За запитом нічого не знайдено!';
+export const CATEGORY_SECTION_HEADER_TEXT = 'Категорії';
 
 
 export const LIST_BUTTONS_PAGES_URLs_END_POINTS = [
