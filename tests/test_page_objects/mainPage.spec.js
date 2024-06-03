@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import HomePage from "../../page_objects/homePage.js";
-import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL  } from "../../helpers/testDataMainPage.js";
+import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL } from "../../helpers/testDataMainPage.js";
 
 test.describe('mainPage.spec', () => {
 	test.beforeEach(async ({ page }) => {
@@ -263,6 +263,71 @@ test.describe('mainPage.spec', () => {
 
 		await expect(homePage.locators.getCatalogBlackBtn()).toBeVisible();
 		await expect(homePage.locators.getCatalogBlackBtn()).toHaveCSS('background', 'rgb(22, 11, 3) none repeat scroll 0% 0% / auto padding-box border-box');
+
+	});
+
+	test('ТС.01.01.2.1 Verify that the user can navigate to the main page after clicking on the logo', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		const catalogPage = await homePage.clickCatalogBlackBtn();
+		await expect(page).toHaveURL(CATALOG_URL);
+		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toBeVisible();
+
+		await catalogPage.clickLogo();
+
+		await expect(page).toHaveURL(BASE_URL);
+
+	});
+
+	test('ТС.01.01.13.1 Verify that the "Кошик" button has a icon (cart)', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getIconCartBtn()).toBeVisible();
+
+	});
+
+	test('ТС.01.01.26 Verify that the header contains a search field button (magnifying glass icon)', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getSearchBtn()).toBeVisible();
+
+	});
+
+	test('ТС.01.01.26.1 Verify that the search field is appeared after clicking on the search field button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.clickSearchBtn();
+
+		await expect(homePage.locators.getSearchField()).toBeVisible();
+
+	});
+
+	test('ТС.01.01.26.2 Verify that the search field contains the "Шукати" placeholder', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.clickSearchBtn();
+
+		await expect(homePage.locators.getSearchFieldPlaceholder()).toBeVisible();
+		await expect(homePage.locators.getSearchFieldPlaceholder()).toHaveAttribute('placeholder', 'Шукати')
+
+	});
+
+	test('ТС.01.01.26.3 Verify that the search field placeholder contains the magnifying glass icon', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.clickSearchBtn();
+
+		await expect(homePage.locators.getSearchFieldPlaceholderIcon()).toBeVisible();
+
+	});
+
+	test('ТС.01.01.26.4 Verify that the search field placeholder disappears after entering text in the field', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.clickSearchBtn();
+		await homePage.typeSearchField();
+
+		await expect(homePage.locators.getSearchField()).toBeVisible();
 
 	});
 
