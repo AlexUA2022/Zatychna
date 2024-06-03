@@ -35,7 +35,8 @@ class HomePage {
 		getSuitsCategory: () => this.page.getByRole('link', { name: 'Костюми' }),
 		getSweatshirtsCategory: () => this.page.getByRole('link', { name: 'Світшоти' }),
 		getHoodieCategory: () => this.page.getByRole('link', { name: 'Худі', exact: true }),
-		getPantsCategory: () => this.page.getByRole('link', { name: 'Штани' })
+		getPantsCategory: () => this.page.getByRole('link', { name: 'Штани' }),
+		getCategoryName: () => this.page.locator('.sc-gHWTLx'),
 
 	};
 
@@ -88,6 +89,31 @@ class HomePage {
 
 	async typeSearchFieldInvalidData() {
 		await this.locators.getSearchField().type('арб');
+	}
+
+	async clickT_ShirtsCategory() {
+		await this.locators.getT_ShirtsCategory().click();
+		return new CatalogPage(this.page);
+	}
+
+	async clickSuitsCategory() {
+		await this.locators.getSuitsCategory().click();
+		return new CatalogPage(this.page);
+	}
+
+	async clickSweatshirtsCategory() {
+		await this.locators.getSweatshirtsCategory().click();
+		return new CatalogPage(this.page);
+	}
+
+	async clickHoodieCategory() {
+		await this.locators.getHoodieCategory().click();
+		return new CatalogPage(this.page);
+	}
+
+	async clickPantsCategory() {
+		await this.locators.getPantsCategory().click();
+		return new CatalogPage(this.page);
 	}
 
 }

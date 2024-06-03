@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import HomePage from "../../page_objects/homePage.js";
-import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL, SEARCH_MESSAGE_TEXT, CATEGORY_SECTION_HEADER_TEXT } from "../../helpers/testDataMainPage.js";
+import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL, SEARCH_MESSAGE_TEXT, CATEGORY_SECTION_HEADER_TEXT, expectedCategoryNames, CATALOG_BREADCRUMBS_TEXT } from "../../helpers/testDataMainPage.js";
+
 
 test.describe('mainPage.spec', () => {
 	test.beforeEach(async ({ page }) => {
@@ -401,6 +402,120 @@ test.describe('mainPage.spec', () => {
 		await expect(homePage.locators.getSweatshirtsCategory()).toBeVisible();
 		await expect(homePage.locators.getHoodieCategory()).toBeVisible();
 		await expect(homePage.locators.getPantsCategory()).toBeVisible();
+
+	});
+
+	test('ТС.01.01.28.1 Verify that the "Категории" section contains names of categories', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		const categoryLocators = [
+			homePage.locators.getCategoryName().first(),
+			homePage.locators.getCategoryName().nth(1),
+			homePage.locators.getCategoryName().nth(2),
+			homePage.locators.getCategoryName().nth(3),
+			homePage.locators.getCategoryName().nth(4)
+		];
+		
+		for (let i = 0; i < expectedCategoryNames.length; i++) {
+				const element = await categoryLocators[i].elementHandle();
+
+				// Перевіряємо, що елемент існує
+				expect(element).toBeTruthy();
+				
+				// Перевіряємо, що елемент є видимим
+				await expect(categoryLocators[i]).toBeVisible();
+				
+				// Отримуємо текст елемента
+				const text = await element.textContent();
+				
+				// Перевіряємо, що текст елемента відповідає очікуваному імені
+				expect(text.trim()).toBe(expectedCategoryNames[i]);
+		}
+
+	});
+
+	test('ТС.01.01.29 Verify that the product categories (cards) have a cursor pointer', async ({ page }) => {
+		const homePage = new HomePage(page);
+  
+		const categoryLocators = [
+			 homePage.locators.getCategoryName().first(),
+			 homePage.locators.getCategoryName().nth(1),
+			 homePage.locators.getCategoryName().nth(2),
+			 homePage.locators.getCategoryName().nth(3),
+			 homePage.locators.getCategoryName().nth(4)
+		];
+  
+		for (let i = 0; i < expectedCategoryNames.length; i++) {
+			 const categoryCard = await categoryLocators[i].elementHandle();
+  
+			 // Проверяем, что карточка категории существует
+			 expect(categoryCard).toBeTruthy();
+  
+			 // Получаем значение CSS-свойства cursor у карточки
+			 const cursorPropertyValue = await categoryCard.evaluate(card => getComputedStyle(card).cursor);
+  
+			 // Проверяем, что у карточки есть курсор-указатель
+			 expect(cursorPropertyValue).toBe('pointer');
+		}
+  });
+
+	test('ТС.01.01.30 Verify that the user can navigate to the "Каталог" page after clicking on the "Футболки" category card', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		const catalogPage = await homePage.clickT_ShirtsCategory();
+
+		await expect(page).toHaveURL(CATALOG_URL);
+
+		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toBeVisible();
+		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toHaveText(CATALOG_BREADCRUMBS_TEXT);
+
+	});
+
+	test('ТС.01.01.31 Verify that the user can navigate to the "Каталог" page after clicking on the "Костюми" category card', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		const catalogPage = await homePage.clickSuitsCategory();
+
+		await expect(page).toHaveURL(CATALOG_URL);
+
+		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toBeVisible();
+		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toHaveText(CATALOG_BREADCRUMBS_TEXT);
+
+	});
+
+	test('ТС.01.01.32 Verify that the user can navigate to the "Каталог" page after clicking on the "Світшоти" category card', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		const catalogPage = await homePage.clickSweatshirtsCategory();
+
+		await expect(page).toHaveURL(CATALOG_URL);
+
+		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toBeVisible();
+		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toHaveText(CATALOG_BREADCRUMBS_TEXT);
+
+	});
+
+	test('ТС.01.01.33 Verify that the user can navigate to the "Каталог" page after clicking on the "Худі" category card', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		const catalogPage = await homePage.clickHoodieCategory();
+
+		await expect(page).toHaveURL(CATALOG_URL);
+
+		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toBeVisible();
+		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toHaveText(CATALOG_BREADCRUMBS_TEXT);
+
+	});
+
+	test('ТС.01.01.34 Verify that the user can navigate to the "Каталог" page after clicking on the "Штани" category card', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		const catalogPage = await homePage.clickPantsCategory();
+
+		await expect(page).toHaveURL(CATALOG_URL);
+
+		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toBeVisible();
+		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toHaveText(CATALOG_BREADCRUMBS_TEXT);
 
 	});
 
