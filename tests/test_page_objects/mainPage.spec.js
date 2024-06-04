@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import HomePage from "../../page_objects/homePage.js";
-import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL, SEARCH_MESSAGE_TEXT, CATEGORY_SECTION_HEADER_TEXT, expectedCategoryNames, CATALOG_BREADCRUMBS_TEXT } from "../../helpers/testDataMainPage.js";
+import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL, SEARCH_MESSAGE_TEXT, CATEGORY_SECTION_HEADER_TEXT, expectedCategoryNames, CATALOG_BREADCRUMBS_TEXT, SHOW_MORE_LINK_TEXT, ZATYSHNA_DESCRIPTION_TEXT, ZATYSHNA_ADDITIONAL_TEXT } from "../../helpers/testDataMainPage.js";
 
 
 test.describe('mainPage.spec', () => {
@@ -518,6 +518,65 @@ test.describe('mainPage.spec', () => {
 		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toHaveText(CATALOG_BREADCRUMBS_TEXT);
 
 	});
+
+	test('ТС.01.01.35 Verify that the "Категории" section contains the "Показати більше" link', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getShowMoreLink()).toBeVisible();
+		await expect(homePage.locators.getShowMoreLink()).toHaveText(SHOW_MORE_LINK_TEXT);
+
+	});
+
+	test('ТС.01.01.35.1 Verify that the user can navigate to the "Каталог" page after clicking on the "Показати більше" link', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		const catalogPage = await homePage.clickShowMoreLink();
+
+		await expect(page).toHaveURL(CATALOG_URL);
+
+		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toBeVisible();
+		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toHaveText(CATALOG_BREADCRUMBS_TEXT);
+
+	});
+
+	test('ТС.01.01.35.2 Verify that the "Main" page contains the "ZATYSHNA" brand banner', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getZatyshnaBrandBanner()).toBeVisible();
+
+	});
+
+	test('ТС.01.01.35.3 Verify that the "ZATYSHNA" brand banner has the brand description text', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getZatyshnaBrandBannerDescriptionText()).toBeVisible();
+		await expect(homePage.locators.getZatyshnaBrandBannerDescriptionText()).toHaveText(ZATYSHNA_DESCRIPTION_TEXT);
+
+	});
+
+	test('ТС.01.01.35.4 Verify that the "ZATYSHNA" brand banner has the brand additional text', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getZatyshnaBrandBannerAdditionalText()).toBeVisible();
+		await expect(homePage.locators.getZatyshnaBrandBannerAdditionalText()).toHaveText(ZATYSHNA_ADDITIONAL_TEXT);
+
+	});
+
+	test('ТС.01.01.35.5 Verify that the "ZATYSHNA" brand banner has the image', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getZatyshnaBrandBannerImage()).toBeVisible();
+
+	});
+
+	test('ТС.01.01.35.6 Verify that the "ZATYSHNA" brand banner has the "rgb(244, 239, 235) none repeat scroll 0% 0% / auto padding-box border-box" background color', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getZatyshnaBrandBanner()).toBeVisible();
+		await expect(homePage.locators.getZatyshnaBrandBanner()).toHaveCSS('background', 'rgb(244, 239, 235) none repeat scroll 0% 0% / auto padding-box border-box');
+
+	});
+
 
 
 })
