@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import HomePage from "../../page_objects/homePage.js";
-import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL, SEARCH_MESSAGE_TEXT, CATEGORY_SECTION_HEADER_TEXT, expectedCategoryNames, CATALOG_BREADCRUMBS_TEXT, SHOW_MORE_LINK_TEXT, ZATYSHNA_DESCRIPTION_TEXT, ZATYSHNA_ADDITIONAL_TEXT } from "../../helpers/testDataMainPage.js";
+import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL, SEARCH_MESSAGE_TEXT, CATEGORY_SECTION_HEADER_TEXT, expectedCategoryNames, CATALOG_BREADCRUMBS_TEXT, SHOW_MORE_LINK_TEXT, ZATYSHNA_DESCRIPTION_TEXT, ZATYSHNA_ADDITIONAL_TEXT, SUBSCRIPTION_SECTION_BTN_TEXT, SUBSCRIPTION_SECTION_FIELD_MESSAGE_TEXT } from "../../helpers/testDataMainPage.js";
 
 
 test.describe('mainPage.spec', () => {
@@ -576,6 +576,66 @@ test.describe('mainPage.spec', () => {
 		await expect(homePage.locators.getZatyshnaBrandBanner()).toHaveCSS('background', 'rgb(244, 239, 235) none repeat scroll 0% 0% / auto padding-box border-box');
 
 	});
+
+	test('ТС.01.01.36 Verify that the "Main" page contains a subscription section', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getSubscriptionSection()).toBeVisible();
+
+	});
+
+	test('ТС.01.01.37 Verify that the subscription section contains "Надiслати" button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getSubscriptionSectionSendBtn()).toBeVisible();
+		await expect(homePage.locators.getSubscriptionSectionSendBtn()).toHaveCSS('background', 'rgb(25, 25, 25) none repeat scroll 0% 0% / auto padding-box border-box');
+		await expect(homePage.locators.getSubscriptionSectionSendBtn()).toHaveText(SUBSCRIPTION_SECTION_BTN_TEXT);
+
+	});
+
+	test('ТС.01.01.38 Verify that the "Надiслати" button has a cursor pointer', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getSubscriptionSectionSendBtn()).toBeVisible();
+		await expect(homePage.locators.getSubscriptionSectionSendBtn()).toHaveCSS('cursor', 'pointer');
+
+	});
+
+	test('ТС.01.01.39 Verify that the subscription section contains the subscription field', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getSubscriptionSectionField()).toBeVisible();
+
+	});
+
+	test('ТС.01.01.39.1 Verify that the subscription field contains the "Email" placeholder', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getSubscriptionSectionField()).toBeVisible();
+		await expect(homePage.locators.getSubscriptionSectionField()).toHaveAttribute('placeholder', 'Email')
+
+	});
+
+	test('ТС.01.01.40 Verify that the "Email" placeholder disappears after entering text in the field', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.typeSubscriptionSectionField();
+
+		await expect(homePage.locators.getSubscriptionSectionField()).toBeVisible();
+
+	});
+
+	test('ТС.01.01.41 Verify that the user can subscribe by entering an existing e-mail (valid address). The "Ви успішно підписалися на сповіщення!" message appears', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.typeSubscriptionSectionFieldEmail();
+		await homePage.clickSubscriptionSectionSendBtn();
+
+		await expect(homePage.locators.getSubscriptionSectionFieldMessage()).toBeVisible();
+		await expect(homePage.locators.getSubscriptionSectionFieldMessage()).toHaveText(SUBSCRIPTION_SECTION_FIELD_MESSAGE_TEXT);
+
+	});
+
 
 
 
