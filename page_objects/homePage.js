@@ -37,6 +37,11 @@ class HomePage {
 		getHoodieCategory: () => this.page.getByRole('link', { name: 'Худі', exact: true }),
 		getPantsCategory: () => this.page.getByRole('link', { name: 'Штани' }),
 		getCategoryName: () => this.page.locator('.sc-gHWTLx'),
+		getShowMoreLink: () => this.page.getByRole('link', { name: 'Показати більше' }),
+		getZatyshnaBrandBanner: () => this.page.locator('section').filter({ hasText: 'Zatyshna' }),
+		getZatyshnaBrandBannerDescriptionText: () => this.page.getByRole('heading', { name: 'Zatyshna' }),
+		getZatyshnaBrandBannerAdditionalText: () => this.page.getByText('Створений для жінок, що цінують комфорт. Стильно та зручно - це про нас і про тебе'),
+		getZatyshnaBrandBannerImage: () => this.page.locator('section').filter({ hasText: 'Zatyshna' }).locator('div').nth(2)
 
 	};
 
@@ -113,6 +118,11 @@ class HomePage {
 
 	async clickPantsCategory() {
 		await this.locators.getPantsCategory().click();
+		return new CatalogPage(this.page);
+	}
+
+	async clickShowMoreLink() {
+		await this.locators.getShowMoreLink().click();
 		return new CatalogPage(this.page);
 	}
 
