@@ -41,7 +41,11 @@ class HomePage {
 		getZatyshnaBrandBanner: () => this.page.locator('section').filter({ hasText: 'Zatyshna' }),
 		getZatyshnaBrandBannerDescriptionText: () => this.page.getByRole('heading', { name: 'Zatyshna' }),
 		getZatyshnaBrandBannerAdditionalText: () => this.page.getByText('Створений для жінок, що цінують комфорт. Стильно та зручно - це про нас і про тебе'),
-		getZatyshnaBrandBannerImage: () => this.page.locator('section').filter({ hasText: 'Zatyshna' }).locator('div').nth(2)
+		getZatyshnaBrandBannerImage: () => this.page.locator('section').filter({ hasText: 'Zatyshna' }).locator('div').nth(2),
+		getSubscriptionSection: () => this.page.locator('div').filter({ hasText: /^Підписуйся та будь в курсі усіх новинок та знижок!Надіслати$/ }).first(),
+		getSubscriptionSectionSendBtn: () => this.page.getByRole('button', { name: 'Надіслати' }),
+		getSubscriptionSectionField: () => this.page.getByPlaceholder('Email'),
+		getSubscriptionSectionFieldMessage: () => this.page.getByText('Ви успішно підписалися на сповіщення!')
 
 	};
 
@@ -124,6 +128,18 @@ class HomePage {
 	async clickShowMoreLink() {
 		await this.locators.getShowMoreLink().click();
 		return new CatalogPage(this.page);
+	}
+
+	async typeSubscriptionSectionField() {
+		await this.locators.getSubscriptionSectionField().type('a');
+	}
+
+	async typeSubscriptionSectionFieldEmail() {
+		await this.locators.getSubscriptionSectionField().type('sapa2017@ukr.net');
+	}
+
+	async clickSubscriptionSectionSendBtn() {
+		await this.locators.getSubscriptionSectionSendBtn().click();
 	}
 
 }

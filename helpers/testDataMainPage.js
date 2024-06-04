@@ -20,6 +20,8 @@ export const CATEGORY_SECTION_HEADER_TEXT = 'Категорії';
 export const SHOW_MORE_LINK_TEXT = 'Показати більше';
 export const ZATYSHNA_DESCRIPTION_TEXT = 'Zatyshna – це український бренд жіночого одягу';
 export const ZATYSHNA_ADDITIONAL_TEXT = 'Створений для жінок, що цінують комфорт. Стильно та зручно - це про нас і про тебе.';
+export const SUBSCRIPTION_SECTION_BTN_TEXT = 'Надіслати';
+export const SUBSCRIPTION_SECTION_FIELD_MESSAGE_TEXT = 'Ви успішно підписалися на сповіщення!';
 
 export const LIST_BUTTONS_PAGES_URLs_END_POINTS = [
 	'/catalog',
