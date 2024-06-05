@@ -57,7 +57,11 @@ class HomePage {
 		getFooterGolovnaBtn: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Головна' }),
 		getFooterCatalogBtn: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Каталог' }),
 		getFooterAboutUsBtn: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Про нас' }),
-		getFooterContactsBtn: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Контакти' })
+		getFooterContactsBtn: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Контакти' }),
+		getFooterLogo: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Zatyshna' }),
+		getMainPageImg: () => this.page.locator('div').filter({ hasText: /^Каталог$/ }),
+		getFacebookBtnLink: () => this.page.locator('div').filter({ hasText: /^Zatyshna$/ }).getByRole('link').nth(1),
+		getInstagramBtnLink: () => this.page.locator('div').filter({ hasText: /^Zatyshna$/ }).getByRole('link').nth(2)
 	};
 
 	async open() {
@@ -208,6 +212,10 @@ class HomePage {
 		return new ContactsPage(this.page);
 	}
 
+	async clickFooterLogo() {
+		await this.locators.getFooterLogo().click();
+		return this;
+	}
 
 }
 
