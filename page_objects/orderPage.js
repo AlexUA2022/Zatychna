@@ -19,6 +19,9 @@ class OrderPage {
 		getOrderButton: () => this.page.getByRole('button', { name: 'Оформити замовлення' }),
 		getMessageWarnings: () => this.page.getByText('Поле приймає тільки кирилицю та латиницю'),
 		getName2Field: () => this.page.getByPlaceholder('Ім’я'),
+		getNumberPhoneField: () => this.page.getByPlaceholder('+38(0__)___-__-__'),
+		getEmailField: () => this.page.getByPlaceholder('E-mail'),
+		getMessageEmailField: () => this.page.getByText('Будь ласка, введіть дійсну адресу електронної пошти'),
 
     }
 
@@ -33,6 +36,17 @@ class OrderPage {
 	async filldigitName2Field() {
 		await this.locators.getName2Field().fill('3535');
 	}
+
+	async fillNumberPhoneField() {
+		await this.locators.getNumberPhoneField().fill('506426494');
+	}
+
+	async fillSpaceAfterAtEmailField() {
+		await this.locators.getEmailField().fill('kati@ gmail.com');
+	}
+
+
+
 
 
 
