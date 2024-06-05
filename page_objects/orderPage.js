@@ -45,6 +45,36 @@ class OrderPage {
 		await this.locators.getEmailField().fill('kati@ gmail.com');
 	}
 
+	async fillSpaceBeforeAtEmailField() {
+		await this.locators.getEmailField().fill('kati @gmail.com');
+	}
+
+	async fillWithoutDotDomainEmailField() {
+		await this.locators.getEmailField().fill('kati@gmailcom');
+	}
+
+
+	async fillWihtDotDomainNameEmailField() {
+		await this.locators.getEmailField().fill('kati@gmai.l.com');
+	}
+
+	async fillWihtoutAtDotEmailField() {
+		await this.locators.getEmailField().fill('katigmail.com');
+	}
+
+	async fillWihtoutNameEmailField() {
+		await this.locators.getEmailField().fill('@gmail.com');
+	}
+
+	async fillSpecialCharactersEmailField() {
+		await this.locators.getEmailField().fill('^&%$@gmail.com');
+	}
+
+
+	async fillCyrillicLettersEmailField() {
+		await this.locators.getEmailField().fill('катрусяgmail.com');
+	}
+
 
 
 
