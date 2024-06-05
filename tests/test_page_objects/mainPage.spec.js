@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import HomePage from "../../page_objects/homePage.js";
-import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL, SEARCH_MESSAGE_TEXT, CATEGORY_SECTION_HEADER_TEXT, expectedCategoryNames, CATALOG_BREADCRUMBS_TEXT, SHOW_MORE_LINK_TEXT, ZATYSHNA_DESCRIPTION_TEXT, ZATYSHNA_ADDITIONAL_TEXT, SUBSCRIPTION_SECTION_BTN_TEXT, SUBSCRIPTION_SECTION_FIELD_MESSAGE_TEXT } from "../../helpers/testDataMainPage.js";
+import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL, SEARCH_MESSAGE_TEXT, CATEGORY_SECTION_HEADER_TEXT, expectedCategoryNames, CATALOG_BREADCRUMBS_TEXT, SHOW_MORE_LINK_TEXT, ZATYSHNA_DESCRIPTION_TEXT, ZATYSHNA_ADDITIONAL_TEXT, SUBSCRIPTION_SECTION_BTN_TEXT, SUBSCRIPTION_SECTION_FIELD_MESSAGE_TEXT, TYPE_IN_SUBSCRIPTION_FIELD, SUBSCRIPTION_SECTION_FIELD_ERROR_MESSAGE_TEXT } from "../../helpers/testDataMainPage.js";
 
 
 test.describe('mainPage.spec', () => {
@@ -619,7 +619,7 @@ test.describe('mainPage.spec', () => {
 	test('ТС.01.01.40 Verify that the "Email" placeholder disappears after entering text in the field', async ({ page }) => {
 		const homePage = new HomePage(page);
 
-		await homePage.typeSubscriptionSectionField();
+		await homePage.typeSubscriptionSectionField(TYPE_IN_SUBSCRIPTION_FIELD.letter_a);
 
 		await expect(homePage.locators.getSubscriptionSectionField()).toBeVisible();
 
@@ -628,7 +628,7 @@ test.describe('mainPage.spec', () => {
 	test('ТС.01.01.41 Verify that the user can subscribe by entering an existing e-mail (valid address). The "Ви успішно підписалися на сповіщення!" message appears', async ({ page }) => {
 		const homePage = new HomePage(page);
 
-		await homePage.typeSubscriptionSectionFieldEmail();
+		await homePage.typeSubscriptionSectionFieldEmail(TYPE_IN_SUBSCRIPTION_FIELD.existing_email);
 		await homePage.clickSubscriptionSectionSendBtn();
 
 		await expect(homePage.locators.getSubscriptionSectionFieldMessage()).toBeVisible();
@@ -636,8 +636,91 @@ test.describe('mainPage.spec', () => {
 
 	});
 
+	test('ТС.01.01.42 Verify that the subscription field rejects an email address if there is a space after the @ sign', async ({ page }) => {
+		const homePage = new HomePage(page);
 
+		await homePage.typeSubscriptionSectionFieldEmail_2(TYPE_IN_SUBSCRIPTION_FIELD.space_after_the_at_sign);
+		await homePage.clickSubscriptionSectionSendBtn();
 
+		await expect(homePage.locators.getSubscriptionSectionFieldMessage()).not.toBeVisible();
+
+	});
+
+	test('ТС.01.01.43 Verify that the subscription field rejects an email address if there is a space before the @ sign', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.typeSubscriptionSectionFieldEmail_3(TYPE_IN_SUBSCRIPTION_FIELD.space_before_the_at_sign);
+		await homePage.clickSubscriptionSectionSendBtn();
+
+		await expect(homePage.locators.getSubscriptionSectionFieldMessage()).not.toBeVisible();
+
+	});
+
+	test('ТС.01.01.44 Verify that the subscription field rejects an email address if there is no dot in the domain name', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.typeSubscriptionSectionFieldEmail_4(TYPE_IN_SUBSCRIPTION_FIELD.no_dot_in_the_domain_name);
+		await homePage.clickSubscriptionSectionSendBtn();
+
+		await expect(homePage.locators.getSubscriptionSectionFieldMessage()).not.toBeVisible();
+
+	});
+
+	test('ТС.01.01.45 Verify that the subscription field rejects an email address if there is no @ sign in the email address', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.typeSubscriptionSectionFieldEmail_5(TYPE_IN_SUBSCRIPTION_FIELD.without_at_sign);
+		await homePage.clickSubscriptionSectionSendBtn();
+
+		await expect(homePage.locators.getSubscriptionSectionFieldMessage()).not.toBeVisible();
+
+	});
+
+	test('ТС.01.01.46 Verify that the subscription field rejects an email address if there is no text before the @ sign', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.typeSubscriptionSectionFieldEmail_6(TYPE_IN_SUBSCRIPTION_FIELD.without_text_before_at_sign);
+		await homePage.clickSubscriptionSectionSendBtn();
+
+		await expect(homePage.locators.getSubscriptionSectionFieldMessage()).not.toBeVisible();
+
+	});
+
+	test('ТС.01.01.47 Verify that the subscription field rejects an email address if there are special characters before the @ sign. The "Будь ласка, введіть дійсну адресу електронної пошти." message appears', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.typeSubscriptionSectionFieldEmail_7(TYPE_IN_SUBSCRIPTION_FIELD.special_characters_before_at_sign);
+		await homePage.clickSubscriptionSectionSendBtn();
+
+		await expect(homePage.locators.getSubscriptionSectionFieldMessage()).not.toBeVisible();
+
+		await expect(homePage.locators.getSubscriptionSectionFieldErrorMessage()).toBeVisible();
+		await expect(homePage.locators.getSubscriptionSectionFieldErrorMessage()).toHaveText(SUBSCRIPTION_SECTION_FIELD_ERROR_MESSAGE_TEXT);
+
+	});
+
+	test('ТС.01.01.48 Verify that the subscription field rejects an email address if there are Cyrillic letters before the @ sign', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.typeSubscriptionSectionFieldEmail_8(TYPE_IN_SUBSCRIPTION_FIELD.сyrillic_letters_before_at_sign);
+		await homePage.clickSubscriptionSectionSendBtn();
+
+		await expect(homePage.locators.getSubscriptionSectionFieldMessage()).not.toBeVisible();
+
+	});
+
+	test('ТС.01.01.49 Verify that the subscription field rejects an invalid email address', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.typeSubscriptionSectionFieldEmail_9(TYPE_IN_SUBSCRIPTION_FIELD.invalid_email);
+		await homePage.clickSubscriptionSectionSendBtn();
+
+		await expect(homePage.locators.getSubscriptionSectionFieldMessage()).not.toBeVisible();
+
+		await expect(homePage.locators.getSubscriptionSectionFieldErrorMessage()).toBeVisible();
+		await expect(homePage.locators.getSubscriptionSectionFieldErrorMessage()).toHaveText(SUBSCRIPTION_SECTION_FIELD_ERROR_MESSAGE_TEXT);
+
+	});
 
 })
 
