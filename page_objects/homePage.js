@@ -1,3 +1,4 @@
+import AboutUsPage from "./aboutUsPage";
 import CatalogPage from "./catalogPage";
 import ContactsPage from "./contactsPage";
 
@@ -54,7 +55,9 @@ class HomePage {
 		getContactUsBlockText: () => this.page.getByText('Звертайтесь до нас з будь-якихдодаткових питань'),
 		getContactUsPhoneNumber: () => this.page.getByRole('link', { name: '+' }),
 		getFooterGolovnaBtn: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Головна' }),
-		getFooterCatalogBtn: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Каталог' })
+		getFooterCatalogBtn: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Каталог' }),
+		getFooterAboutUsBtn: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Про нас' }),
+		getFooterContactsBtn: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Контакти' })
 	};
 
 	async open() {
@@ -189,6 +192,22 @@ class HomePage {
 	async typeSubscriptionSectionFieldEmail_11(signed_email) {
 		await this.locators.getSubscriptionSectionField().type(signed_email);
 	}
+
+	async clickFooterCatalogBtn() {
+		await this.locators.getFooterCatalogBtn().click();
+		return new CatalogPage(this.page);
+	}
+
+	async clickFooterAboutUsBtn() {
+		await this.locators.getFooterAboutUsBtn().click();
+		return new AboutUsPage(this.page);
+	}
+
+	async clickFooterContactsBtn() {
+		await this.locators.getFooterContactsBtn().click();
+		return new ContactsPage(this.page);
+	}
+
 
 }
 

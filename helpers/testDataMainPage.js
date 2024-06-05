@@ -2,6 +2,7 @@
 export const BASE_URL = 'https://clothing-store-app.vercel.app';
 export const CONTACTS_URL = 'https://clothing-store-app.vercel.app/contacts';
 export const CATALOG_URL = 'https://clothing-store-app.vercel.app/catalog';
+export const ABOUT_US_URL = 'https://clothing-store-app.vercel.app/about';
 
 
 //test data
@@ -29,6 +30,8 @@ export const CONTACT_US_ADD_TEXT = 'Звертайтесь до нас з буд
 export const CONTACT_US_PHONE_NUMBER = '+380743748270';
 export const FOOTER_GOLOVNA_BUTTON_TEXT = 'Головна';
 export const FOOTER_CATALOG_BUTTON_TEXT = 'Каталог';
+export const FOOTER_ABOUT_US_BUTTON_TEXT = 'Про нас';
+export const FOOTER_CONTACTS_BUTTON_TEXT = 'Контакти';
 
 export const LIST_BUTTONS_PAGES_URLs_END_POINTS = [
 	'/catalog',
