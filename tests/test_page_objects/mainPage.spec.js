@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import HomePage from "../../page_objects/homePage.js";
-import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL, SEARCH_MESSAGE_TEXT, CATEGORY_SECTION_HEADER_TEXT, expectedCategoryNames, CATALOG_BREADCRUMBS_TEXT, SHOW_MORE_LINK_TEXT, ZATYSHNA_DESCRIPTION_TEXT, ZATYSHNA_ADDITIONAL_TEXT, SUBSCRIPTION_SECTION_BTN_TEXT, SUBSCRIPTION_SECTION_FIELD_MESSAGE_TEXT, TYPE_IN_SUBSCRIPTION_FIELD, SUBSCRIPTION_SECTION_FIELD_ERROR_MESSAGE_TEXT } from "../../helpers/testDataMainPage.js";
+import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL, SEARCH_MESSAGE_TEXT, CATEGORY_SECTION_HEADER_TEXT, expectedCategoryNames, CATALOG_BREADCRUMBS_TEXT, SHOW_MORE_LINK_TEXT, ZATYSHNA_DESCRIPTION_TEXT, ZATYSHNA_ADDITIONAL_TEXT, SUBSCRIPTION_SECTION_BTN_TEXT, SUBSCRIPTION_SECTION_FIELD_MESSAGE_TEXT, TYPE_IN_SUBSCRIPTION_FIELD, SUBSCRIPTION_SECTION_FIELD_ERROR_MESSAGE_TEXT, SUBSCRIPTION_SECTION_TEXT, CONTACT_US_TEXT, CONTACT_US_ADD_TEXT } from "../../helpers/testDataMainPage.js";
 
 
 test.describe('mainPage.spec', () => {
@@ -721,6 +721,68 @@ test.describe('mainPage.spec', () => {
 		await expect(homePage.locators.getSubscriptionSectionFieldErrorMessage()).toHaveText(SUBSCRIPTION_SECTION_FIELD_ERROR_MESSAGE_TEXT);
 
 	});
+
+	test('ТС.01.01.50 Verify that the subscription field rejects an email address if there is no domain suffix (e.g., .com)', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.typeSubscriptionSectionFieldEmail_10(TYPE_IN_SUBSCRIPTION_FIELD.without_domain_name);
+		await homePage.clickSubscriptionSectionSendBtn();
+
+		await expect(homePage.locators.getSubscriptionSectionFieldMessage()).not.toBeVisible();
+
+		await expect(homePage.locators.getSubscriptionSectionFieldErrorMessage()).toBeVisible();
+		await expect(homePage.locators.getSubscriptionSectionFieldErrorMessage()).toHaveText(SUBSCRIPTION_SECTION_FIELD_ERROR_MESSAGE_TEXT);
+
+	});
+
+	test('ТС.01.01.51 Verify that the subscription field rejects a signed email address', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.typeSubscriptionSectionFieldEmail_11(TYPE_IN_SUBSCRIPTION_FIELD.signed_email);
+		await homePage.clickSubscriptionSectionSendBtn();
+
+		await expect(homePage.locators.getSubscriptionSectionFieldMessage()).toBeVisible();
+
+	});
+
+	test('ТС.01.01.52 Verify that the subscription section contains the image', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getSubscriptionSectionImg()).toBeVisible();
+
+	});
+
+	test('ТС.01.01.53 Verify that the subscription section contains the description text', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getSubscriptionSectionText()).toBeVisible();
+		await expect(homePage.locators.getSubscriptionSectionText()).toHaveText(SUBSCRIPTION_SECTION_TEXT);
+
+	});
+
+	test('ТС.01.01.54 Verify that the "Main" page contains the site footer', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getFooter()).toBeVisible();
+
+	});
+
+	test('ТС.01.01.55 Verify that the site footer contains the "Зв\'язатися з нами" block', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getContactUsBlock()).toBeVisible();
+		await expect(homePage.locators.getContactUsBlock()).toContainText(CONTACT_US_TEXT);
+
+	});
+
+	test('ТС.01.01.56 Verify that the "Зв\'язатися з нами" block contains the "Звертайтесь до нас з будь-яких додаткових питань" text', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getContactUsBlockText()).toBeVisible();
+		await expect(homePage.locators.getContactUsBlockText()).toContainText(CONTACT_US_ADD_TEXT);
+
+	});
+
 
 })
 

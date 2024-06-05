@@ -23,6 +23,9 @@ export const ZATYSHNA_ADDITIONAL_TEXT = 'Створений для жінок, �
 export const SUBSCRIPTION_SECTION_BTN_TEXT = 'Надіслати';
 export const SUBSCRIPTION_SECTION_FIELD_MESSAGE_TEXT = 'Ви успішно підписалися на сповіщення!';
 export const SUBSCRIPTION_SECTION_FIELD_ERROR_MESSAGE_TEXT = 'Будь ласка, введіть дійсну адресу електронної пошти.';
+export const SUBSCRIPTION_SECTION_TEXT = 'Підписуйся та будь в курсі усіх новинок та знижок!';
+export const CONTACT_US_TEXT = 'Зв’язатися з нами';
+export const CONTACT_US_ADD_TEXT = 'Звертайтесь до нас з будь-якихдодаткових питань';
 
 export const LIST_BUTTONS_PAGES_URLs_END_POINTS = [
 	'/catalog',
@@ -49,7 +52,8 @@ export const TYPE_IN_SUBSCRIPTION_FIELD = {
 	special_characters_before_at_sign: 'qwer#@gmail.com',
 	сyrillic_letters_before_at_sign: 'цwery@gmail.com',
 	invalid_email: 'test@test',
-
+	without_domain_name: 'qwery@gmail',
+	signed_email: 'sapa2017@ukr.net',
 };
 
 //login  credential
