@@ -958,5 +958,36 @@ test.describe('mainPage.spec', () => {
 		
 	});
 
+	test('ТС.01.01.80 Verify that the site footer contains the "Scroll to top" button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getGoTopLink()).toBeVisible();
+		
+	});
+
+	test('ТС.01.01.81 Verify that the "Scroll to top" has a pointer cursor', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getGoTopLink()).toBeVisible();
+		await expect(homePage.locators.getGoTopLink()).toHaveCSS('cursor', 'pointer');
+	});
+
+	test('ТС.01.01.82 Verify that the "Scroll to top" contains the icon', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getScrollToTopBtnIcon()).toBeVisible();
+
+	});
+
+	test('ТС.01.01.83 Verify that the page scrolls to the top after clicking the "Scroll to top" button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.clickScrollToTopBtnIcon();
+
+		await expect(homePage.locators.getMainPageImg()).toBeVisible();
+
+	});
+
+
 })
 

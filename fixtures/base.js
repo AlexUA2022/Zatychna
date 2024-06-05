@@ -34,4 +34,18 @@ export const test = base.extend({
         },
         { scope: "test" },
     ],
+
+	 openProductCart: [
+		async ({ page }, use) => {
+
+
+			 const homePage = new HomePage(page);
+	 		 await homePage.open();
+			 await homePage.clickOpenProductCart();
+
+			 await use("");
+		},
+		{ scope: "test" },
+  ]
+
 })
