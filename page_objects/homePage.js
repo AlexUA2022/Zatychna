@@ -1,6 +1,7 @@
 import AboutUsPage from "./aboutUsPage";
 import CatalogPage from "./catalogPage";
 import ContactsPage from "./contactsPage";
+import ProductPage from "./productPage";
 
 class HomePage {
 	constructor(page) {
@@ -61,7 +62,10 @@ class HomePage {
 		getFooterLogo: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Zatyshna' }),
 		getMainPageImg: () => this.page.locator('div').filter({ hasText: /^Каталог$/ }),
 		getFacebookBtnLink: () => this.page.locator('div').filter({ hasText: /^Zatyshna$/ }).getByRole('link').nth(1),
-		getInstagramBtnLink: () => this.page.locator('div').filter({ hasText: /^Zatyshna$/ }).getByRole('link').nth(2)
+		getInstagramBtnLink: () => this.page.locator('div').filter({ hasText: /^Zatyshna$/ }).getByRole('link').nth(2),
+		getGoTopLink: () => this.page.getByRole('button').nth(1),
+		getScrollToTopBtnIcon: () => this.page.locator('.sc-kZOtbI'),
+		getOpenProductCart: () => this.page.getByRole('link', { name: 'Футболка Obsessed with fa...' })
 	};
 
 	async open() {
@@ -215,6 +219,16 @@ class HomePage {
 	async clickFooterLogo() {
 		await this.locators.getFooterLogo().click();
 		return this;
+	}
+
+	async clickScrollToTopBtnIcon() {
+		await this.locators.getScrollToTopBtnIcon().click();
+		return this;
+	}
+
+	async clickOpenProductCart() {
+		await this.locators.getOpenProductCart().click();
+		return new ProductPage(this.page);
 	}
 
 }
