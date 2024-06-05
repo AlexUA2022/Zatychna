@@ -45,7 +45,8 @@ class HomePage {
 		getSubscriptionSection: () => this.page.locator('div').filter({ hasText: /^Підписуйся та будь в курсі усіх новинок та знижок!Надіслати$/ }).first(),
 		getSubscriptionSectionSendBtn: () => this.page.getByRole('button', { name: 'Надіслати' }),
 		getSubscriptionSectionField: () => this.page.getByPlaceholder('Email'),
-		getSubscriptionSectionFieldMessage: () => this.page.getByText('Ви успішно підписалися на сповіщення!')
+		getSubscriptionSectionFieldMessage: () => this.page.getByText('Ви успішно підписалися на сповіщення!'),
+		getSubscriptionSectionFieldErrorMessage: () => this.page.getByText('Будь ласка, введіть дійсну адресу електронної пошти')
 
 	};
 
@@ -130,16 +131,48 @@ class HomePage {
 		return new CatalogPage(this.page);
 	}
 
-	async typeSubscriptionSectionField() {
-		await this.locators.getSubscriptionSectionField().type('a');
-	}
-
-	async typeSubscriptionSectionFieldEmail() {
-		await this.locators.getSubscriptionSectionField().type('sapa2017@ukr.net');
-	}
-
 	async clickSubscriptionSectionSendBtn() {
 		await this.locators.getSubscriptionSectionSendBtn().click();
+	}
+
+	async typeSubscriptionSectionField(letter_a) {
+		await this.locators.getSubscriptionSectionField().type(letter_a);
+	}
+
+	async typeSubscriptionSectionFieldEmail(existing_email) {
+		await this.locators.getSubscriptionSectionField().type(existing_email);
+	}
+
+	async typeSubscriptionSectionFieldEmail_2(space_after_the_at_sign) {
+		await this.locators.getSubscriptionSectionField().type(space_after_the_at_sign);
+	}
+
+	async typeSubscriptionSectionFieldEmail_3(space_before_the_at_sign) {
+		await this.locators.getSubscriptionSectionField().type(space_before_the_at_sign);
+	}
+
+	async typeSubscriptionSectionFieldEmail_4(no_dot_in_the_domain_name) {
+		await this.locators.getSubscriptionSectionField().type(no_dot_in_the_domain_name);
+	}
+
+	async typeSubscriptionSectionFieldEmail_5(without_at_sign) {
+		await this.locators.getSubscriptionSectionField().type(without_at_sign);
+	}
+
+	async typeSubscriptionSectionFieldEmail_6(without_text_before_at_sign) {
+		await this.locators.getSubscriptionSectionField().type(without_text_before_at_sign);
+	}
+
+	async typeSubscriptionSectionFieldEmail_7(special_characters_before_at_sign) {
+		await this.locators.getSubscriptionSectionField().type(special_characters_before_at_sign);
+	}
+
+	async typeSubscriptionSectionFieldEmail_8(сyrillic_letters_before_at_sign) {
+		await this.locators.getSubscriptionSectionField().type(сyrillic_letters_before_at_sign);
+	}
+
+	async typeSubscriptionSectionFieldEmail_9(invalid_email) {
+		await this.locators.getSubscriptionSectionField().type(invalid_email);
 	}
 
 }

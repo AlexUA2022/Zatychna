@@ -22,6 +22,7 @@ export const ZATYSHNA_DESCRIPTION_TEXT = 'Zatyshna – це українськи
 export const ZATYSHNA_ADDITIONAL_TEXT = 'Створений для жінок, що цінують комфорт. Стильно та зручно - це про нас і про тебе.';
 export const SUBSCRIPTION_SECTION_BTN_TEXT = 'Надіслати';
 export const SUBSCRIPTION_SECTION_FIELD_MESSAGE_TEXT = 'Ви успішно підписалися на сповіщення!';
+export const SUBSCRIPTION_SECTION_FIELD_ERROR_MESSAGE_TEXT = 'Будь ласка, введіть дійсну адресу електронної пошти.';
 
 export const LIST_BUTTONS_PAGES_URLs_END_POINTS = [
 	'/catalog',
@@ -36,6 +37,20 @@ export const expectedCategoryNames = [
 	'Худі',
 	'Штани'
 ];
+
+export const TYPE_IN_SUBSCRIPTION_FIELD = {
+	letter_a: 'a',
+	existing_email: 'sapa2017@ukr.net',
+	space_after_the_at_sign: 'qwery@ gmail.com',
+	space_before_the_at_sign: 'qwery @gmail.com',
+	no_dot_in_the_domain_name: 'qwery @gmailcom',
+	without_at_sign: 'qwerygmail.com',
+	without_text_before_at_sign: '@gmailcom',
+	special_characters_before_at_sign: 'qwer#@gmail.com',
+	сyrillic_letters_before_at_sign: 'цwery@gmail.com',
+	invalid_email: 'test@test',
+
+};
 
 //login  credential
 
