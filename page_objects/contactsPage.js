@@ -8,7 +8,8 @@ class ContactsPage {
 	locators = {
 		getGolovnaBtn: () => this.page.getByRole('banner').getByRole('link', { name: 'Головна' }),
 		getContactsPageHeader: () => this.page.getByRole('heading', { name: 'Контакти' }),
-		getContactsPageBreadcrumbs: () => this.page.getByRole('main').getByRole('link', { name: 'Головна' })
+		getContactsPageBreadcrumbsGolovna: () => this.page.getByRole('main').getByRole('link', { name: 'Головна' }),
+		getContactsPageBreadcrumbs: () => this.page.getByRole('main').getByRole('link', { name: 'Контакти' })
 	};
 
 	async clickGolovnaBtn() {
@@ -16,8 +17,8 @@ class ContactsPage {
 		return new HomePage(this.page);
 	}
 
-	async clickContactsPageBreadcrumbs() {
-		await this.locators.getContactsPageBreadcrumbs().click();
+	async clickContactsPageBreadcrumbsGolovna() {
+		await this.locators.getContactsPageBreadcrumbsGolovna().click();
 		return new HomePage(this.page);
 	}
 

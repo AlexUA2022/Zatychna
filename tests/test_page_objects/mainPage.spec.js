@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import HomePage from "../../page_objects/homePage.js";
-import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL, SEARCH_MESSAGE_TEXT, CATEGORY_SECTION_HEADER_TEXT, expectedCategoryNames, CATALOG_BREADCRUMBS_TEXT, SHOW_MORE_LINK_TEXT, ZATYSHNA_DESCRIPTION_TEXT, ZATYSHNA_ADDITIONAL_TEXT, SUBSCRIPTION_SECTION_BTN_TEXT, SUBSCRIPTION_SECTION_FIELD_MESSAGE_TEXT, TYPE_IN_SUBSCRIPTION_FIELD, SUBSCRIPTION_SECTION_FIELD_ERROR_MESSAGE_TEXT, SUBSCRIPTION_SECTION_TEXT, CONTACT_US_TEXT, CONTACT_US_ADD_TEXT, CONTACT_US_PHONE_NUMBER, FOOTER_GOLOVNA_BUTTON_TEXT, FOOTER_CATALOG_BUTTON_TEXT } from "../../helpers/testDataMainPage.js";
+import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL, SEARCH_MESSAGE_TEXT, CATEGORY_SECTION_HEADER_TEXT, expectedCategoryNames, CATALOG_BREADCRUMBS_TEXT, SHOW_MORE_LINK_TEXT, ZATYSHNA_DESCRIPTION_TEXT, ZATYSHNA_ADDITIONAL_TEXT, SUBSCRIPTION_SECTION_BTN_TEXT, SUBSCRIPTION_SECTION_FIELD_MESSAGE_TEXT, TYPE_IN_SUBSCRIPTION_FIELD, SUBSCRIPTION_SECTION_FIELD_ERROR_MESSAGE_TEXT, SUBSCRIPTION_SECTION_TEXT, CONTACT_US_TEXT, CONTACT_US_ADD_TEXT, CONTACT_US_PHONE_NUMBER, FOOTER_GOLOVNA_BUTTON_TEXT, FOOTER_CATALOG_BUTTON_TEXT, FOOTER_ABOUT_US_BUTTON_TEXT, ABOUT_US_URL, FOOTER_CONTACTS_BUTTON_TEXT } from "../../helpers/testDataMainPage.js";
 
 
 test.describe('mainPage.spec', () => {
@@ -226,7 +226,7 @@ test.describe('mainPage.spec', () => {
 		await expect(contactsPage.locators.getContactsPageHeader()).toBeVisible();
 		await expect(contactsPage.locators.getContactsPageHeader()).toHaveText(CONTACTS_PAGE_HEADER_TEXT);
 
-		await contactsPage.clickContactsPageBreadcrumbs();
+		await contactsPage.clickContactsPageBreadcrumbsGolovna();
 
 		await expect(page).toHaveURL(BASE_URL);
 
@@ -842,6 +842,65 @@ test.describe('mainPage.spec', () => {
 		await expect(homePage.locators.getFooterCatalogBtn()).toBeVisible();
 		await expect(homePage.locators.getFooterCatalogBtn()).toHaveCSS('cursor', 'pointer');
 
+	});
+
+	test('ТС.01.01.65 Verify that the user navigates to "Каталог" page after clicking on the "Каталог" button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		const catalogPage = await homePage.clickFooterCatalogBtn();
+		await expect(page).toHaveURL(CATALOG_URL);
+		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toBeVisible();
+
+	});
+
+	test('ТС.01.01.66 Verify that the site footer contains the "Про нас" button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getFooterAboutUsBtn()).toBeVisible();
+		await expect(homePage.locators.getFooterAboutUsBtn()).toHaveText(FOOTER_ABOUT_US_BUTTON_TEXT);
+
+	});
+
+	test('ТС.01.01.67 Verify that the site footer contains the "Про нас" button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getFooterAboutUsBtn()).toBeVisible();
+		await expect(homePage.locators.getFooterAboutUsBtn()).toHaveCSS('cursor', 'pointer');
+
+	});
+
+	test('ТС.01.01.68 Verify that the user navigates to "Про нас" page after clicking on the "Про нас" button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		const aboutUsPage = await homePage.clickFooterAboutUsBtn();
+		await expect(page).toHaveURL(ABOUT_US_URL);
+		await expect(aboutUsPage.locators.getAboutUsBreadcrumbs()).toBeVisible();
+
+	});
+
+	test('ТС.01.01.69 Verify that the site footer contains the "Контакти" button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getFooterContactsBtn()).toBeVisible();
+		await expect(homePage.locators.getFooterContactsBtn()).toHaveText(FOOTER_CONTACTS_BUTTON_TEXT);
+		
+	});
+
+	test('ТС.01.01.70 Verify that the "Контакти" button has a pointer cursor', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getFooterContactsBtn()).toBeVisible();
+		await expect(homePage.locators.getFooterContactsBtn()).toHaveCSS('cursor', 'pointer');
+		
+	});
+
+	test('ТС.01.01.71 Verify that the user navigates to "Контакти" page after clicking on the "Контакти" button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		const contactsPage = await homePage.clickFooterContactsBtn();
+		await expect(page).toHaveURL(CONTACTS_URL);
+		await expect(contactsPage.locators.getContactsPageBreadcrumbs()).toBeVisible();
+		
 	});
 
 
