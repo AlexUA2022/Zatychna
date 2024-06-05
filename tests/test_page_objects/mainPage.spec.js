@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import HomePage from "../../page_objects/homePage.js";
-import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL, SEARCH_MESSAGE_TEXT, CATEGORY_SECTION_HEADER_TEXT, expectedCategoryNames, CATALOG_BREADCRUMBS_TEXT, SHOW_MORE_LINK_TEXT, ZATYSHNA_DESCRIPTION_TEXT, ZATYSHNA_ADDITIONAL_TEXT, SUBSCRIPTION_SECTION_BTN_TEXT, SUBSCRIPTION_SECTION_FIELD_MESSAGE_TEXT, TYPE_IN_SUBSCRIPTION_FIELD, SUBSCRIPTION_SECTION_FIELD_ERROR_MESSAGE_TEXT, SUBSCRIPTION_SECTION_TEXT, CONTACT_US_TEXT, CONTACT_US_ADD_TEXT } from "../../helpers/testDataMainPage.js";
+import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL, SEARCH_MESSAGE_TEXT, CATEGORY_SECTION_HEADER_TEXT, expectedCategoryNames, CATALOG_BREADCRUMBS_TEXT, SHOW_MORE_LINK_TEXT, ZATYSHNA_DESCRIPTION_TEXT, ZATYSHNA_ADDITIONAL_TEXT, SUBSCRIPTION_SECTION_BTN_TEXT, SUBSCRIPTION_SECTION_FIELD_MESSAGE_TEXT, TYPE_IN_SUBSCRIPTION_FIELD, SUBSCRIPTION_SECTION_FIELD_ERROR_MESSAGE_TEXT, SUBSCRIPTION_SECTION_TEXT, CONTACT_US_TEXT, CONTACT_US_ADD_TEXT, CONTACT_US_PHONE_NUMBER, FOOTER_GOLOVNA_BUTTON_TEXT, FOOTER_CATALOG_BUTTON_TEXT } from "../../helpers/testDataMainPage.js";
 
 
 test.describe('mainPage.spec', () => {
@@ -782,6 +782,68 @@ test.describe('mainPage.spec', () => {
 		await expect(homePage.locators.getContactUsBlockText()).toContainText(CONTACT_US_ADD_TEXT);
 
 	});
+
+	test('ТС.01.01.57 Verify that the "Зв\'язатися з нами" block contains the "+380743748270" phone number', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getContactUsPhoneNumber()).toBeVisible();
+		await expect(homePage.locators.getContactUsPhoneNumber()).toHaveText(CONTACT_US_PHONE_NUMBER);
+
+	});
+
+	test('ТС.01.01.58 Verify that the "+380743748270" phone number has a cursor pointer', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getContactUsPhoneNumber()).toBeVisible();
+		await expect(homePage.locators.getContactUsPhoneNumber()).toHaveCSS('cursor', 'pointer');
+
+	});
+
+	test('ТС.01.01.60 Verify that the site footer contains the "Головна" button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getFooterGolovnaBtn()).toBeVisible();
+		await expect(homePage.locators.getFooterGolovnaBtn()).toHaveText(FOOTER_GOLOVNA_BUTTON_TEXT);
+
+	});
+
+	test('ТС.01.01.61 Verify that the "Головна" button has a pointer cursor', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getFooterGolovnaBtn()).toBeVisible();
+		await expect(homePage.locators.getFooterGolovnaBtn()).toHaveCSS('cursor', 'pointer');
+
+	});
+
+	test('ТС.01.01.62 Verify that the user navigates to "Головна" page after clicking on the "Головна" button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		const catalogPage = await homePage.clickCatalogBlackBtn();
+		await expect(page).toHaveURL(CATALOG_URL);
+		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toBeVisible();
+
+		await catalogPage.clickFooterGolovnaBtn();
+
+		await expect(page).toHaveURL(BASE_URL);
+
+	});
+
+	test('ТС.01.01.63 Verify that the site footer contains the "Каталог" button', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getFooterCatalogBtn()).toBeVisible();
+		await expect(homePage.locators.getFooterCatalogBtn()).toHaveText(FOOTER_CATALOG_BUTTON_TEXT);
+
+	});
+
+	test('ТС.01.01.64 Verify that the "Каталог" button has a pointer cursor', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getFooterCatalogBtn()).toBeVisible();
+		await expect(homePage.locators.getFooterCatalogBtn()).toHaveCSS('cursor', 'pointer');
+
+	});
+
 
 
 })

@@ -29,11 +29,8 @@ class CatalogPage {
 		getSwitchPagesForward:  () => this.page.locator('button:nth-child(3)'),
 		getLastPagePangination: () => this.page.getByRole('button', { name: '8' }),
 		getBackPagesForward: () => this.page.locator('.sc-dxfSRF').first(),
-		getJacketProduct: () => this.page.getByRole('link', { name: 'Куртка Quilted з капюшоно...' })
-
-
-
-
+		getJacketProduct: () => this.page.getByRole('link', { name: 'Куртка Quilted з капюшоно...' }),
+		getFooterGolovnaBtn: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Головна' })
 	};
 
 	async clickDropdownSorting() {
@@ -61,6 +58,11 @@ class CatalogPage {
 	async clickJacketProduct() {
 		await this.locators.getJacketProduct().click();
 		return new QuiltedJacketPage(this.page);
+	}
+
+	async clickFooterGolovnaBtn() {
+		await this.locators.getFooterGolovnaBtn().click();
+		return new HomePage(this.page);
 	}
 
 }
