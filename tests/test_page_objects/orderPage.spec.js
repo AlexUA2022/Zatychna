@@ -155,4 +155,67 @@ test.describe('orderPage.spec', () => {
 
     });
 
+    test('TC 04.01.41 Verify that the the email address data is entered by putting a space before the @ sign, an error message will appear', async ({ page, addProductCard }) => {
+        const ogderPage = new OrderPage(page);
+        await ogderPage.fillSpaceBeforeAtEmailField();
+        await ogderPage.clickOrderButton();
+        await page.waitForTimeout(2000);
+        await expect(ogderPage.locators.getMessageEmailField()).toBeTruthy()
+
+    });
+
+    test('TC 04.01.42 Verify that the the email address details are entered by putting enter e-mail without a dot in the domain name, an error message will appear', async ({ page, addProductCard }) => {
+        const ogderPage = new OrderPage(page);
+        await ogderPage.fillWithoutDotDomainEmailField();
+        await ogderPage.clickOrderButton();
+        await page.waitForTimeout(2000);
+        await expect(ogderPage.locators.getMessageEmailField()).toBeTruthy()
+
+    });
+
+    test('TC 04.01.43 Verify that email address details are entered by putting enter e-mail with a dot in the domain name, an error message will appear', async ({ page, addProductCard }) => {
+        const ogderPage = new OrderPage(page);
+        await ogderPage.fillWihtDotDomainNameEmailField();
+        await ogderPage.clickOrderButton();
+        await page.waitForTimeout(2000);
+        await expect(ogderPage.locators.getMessageEmailField()).toBeTruthy()
+
+    });
+
+    test('TC 04.01.44 Verify that the email address details are entered, without the @ sign in the domain name, an error message will appear', async ({ page, addProductCard }) => {
+        const ogderPage = new OrderPage(page);
+        await ogderPage.fillWihtoutAtDotEmailField();
+        await ogderPage.clickOrderButton();
+        await page.waitForTimeout(2000);
+        await expect(ogderPage.locators.getMessageEmailField()).toBeTruthy()
+
+    });
+
+    test('TC 04.01.45 Verify that email address details are entered by entering an email without text before the @ sign, an error message will appear', async ({ page, addProductCard }) => {
+        const ogderPage = new OrderPage(page);
+        await ogderPage.fillWihtoutNameEmailField();
+        await ogderPage.clickOrderButton();
+        await page.waitForTimeout(2000);
+        await expect(ogderPage.locators.getMessageEmailField()).toBeTruthy()
+
+    });
+
+    test('TC 04.01.46 Verify that the email address data is entered by entering special characters before the @ sign, an error message will appear', async ({ page, addProductCard }) => {
+        const ogderPage = new OrderPage(page);
+        await ogderPage.fillSpecialCharactersEmailField();
+        await ogderPage.clickOrderButton();
+        await page.waitForTimeout(2000);
+        await expect(ogderPage.locators.getMessageEmailField()).toBeTruthy()
+
+    });
+    test('TC 04.01.47 Verify that the email address details are entered by entering Cyrillic letters before the @sign, an error message will appear', async ({ page, addProductCard }) => {
+        const ogderPage = new OrderPage(page);
+        await ogderPage.fillCyrillicLettersEmailField();
+        await ogderPage.clickOrderButton();
+        await page.waitForTimeout(2000);
+        await expect(ogderPage.locators.getMessageEmailField()).toBeTruthy()
+
+    });
+
+
 })
