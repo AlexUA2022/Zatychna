@@ -46,7 +46,12 @@ class HomePage {
 		getSubscriptionSectionSendBtn: () => this.page.getByRole('button', { name: 'Надіслати' }),
 		getSubscriptionSectionField: () => this.page.getByPlaceholder('Email'),
 		getSubscriptionSectionFieldMessage: () => this.page.getByText('Ви успішно підписалися на сповіщення!'),
-		getSubscriptionSectionFieldErrorMessage: () => this.page.getByText('Будь ласка, введіть дійсну адресу електронної пошти')
+		getSubscriptionSectionFieldErrorMessage: () => this.page.getByText('Будь ласка, введіть дійсну адресу електронної пошти'),
+		getSubscriptionSectionImg: () => this.page.locator('section').filter({ hasText: 'Підписуйся та будь в курсі усіх новинок та знижок!Надіслати' }).locator('div').nth(1),
+		getSubscriptionSectionText: () => this.page.getByRole('heading', { name: 'Підписуйся та будь в курсі усіх новинок та знижок!' }),
+		getFooter: () => this.page.getByText('ZatyshnaГоловнаКаталогПро насКонтактиЗв’язатися з намиЗвертайтесь до нас з будь-якихдодаткових питань+'),
+		getContactUsBlock: () => this.page.getByText('Зв’язатися з намиЗвертайтесь до нас з будь-якихдодаткових питань+'),
+		getContactUsBlockText: () => this.page.getByText('Звертайтесь до нас з будь-якихдодаткових питань')
 
 	};
 
@@ -173,6 +178,14 @@ class HomePage {
 
 	async typeSubscriptionSectionFieldEmail_9(invalid_email) {
 		await this.locators.getSubscriptionSectionField().type(invalid_email);
+	}
+
+	async typeSubscriptionSectionFieldEmail_10(without_domain_name) {
+		await this.locators.getSubscriptionSectionField().type(without_domain_name);
+	}
+
+	async typeSubscriptionSectionFieldEmail_11(signed_email) {
+		await this.locators.getSubscriptionSectionField().type(signed_email);
 	}
 
 }
