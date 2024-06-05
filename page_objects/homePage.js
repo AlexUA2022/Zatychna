@@ -51,8 +51,10 @@ class HomePage {
 		getSubscriptionSectionText: () => this.page.getByRole('heading', { name: 'Підписуйся та будь в курсі усіх новинок та знижок!' }),
 		getFooter: () => this.page.getByText('ZatyshnaГоловнаКаталогПро насКонтактиЗв’язатися з намиЗвертайтесь до нас з будь-якихдодаткових питань+'),
 		getContactUsBlock: () => this.page.getByText('Зв’язатися з намиЗвертайтесь до нас з будь-якихдодаткових питань+'),
-		getContactUsBlockText: () => this.page.getByText('Звертайтесь до нас з будь-якихдодаткових питань')
-
+		getContactUsBlockText: () => this.page.getByText('Звертайтесь до нас з будь-якихдодаткових питань'),
+		getContactUsPhoneNumber: () => this.page.getByRole('link', { name: '+' }),
+		getFooterGolovnaBtn: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Головна' }),
+		getFooterCatalogBtn: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Каталог' })
 	};
 
 	async open() {

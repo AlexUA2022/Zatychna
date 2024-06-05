@@ -26,6 +26,9 @@ export const SUBSCRIPTION_SECTION_FIELD_ERROR_MESSAGE_TEXT = 'Будь ласк�
 export const SUBSCRIPTION_SECTION_TEXT = 'Підписуйся та будь в курсі усіх новинок та знижок!';
 export const CONTACT_US_TEXT = 'Зв’язатися з нами';
 export const CONTACT_US_ADD_TEXT = 'Звертайтесь до нас з будь-якихдодаткових питань';
+export const CONTACT_US_PHONE_NUMBER = '+380743748270';
+export const FOOTER_GOLOVNA_BUTTON_TEXT = 'Головна';
+export const FOOTER_CATALOG_BUTTON_TEXT = 'Каталог';
 
 export const LIST_BUTTONS_PAGES_URLs_END_POINTS = [
 	'/catalog',
