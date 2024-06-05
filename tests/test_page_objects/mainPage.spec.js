@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import HomePage from "../../page_objects/homePage.js";
-import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL, SEARCH_MESSAGE_TEXT, CATEGORY_SECTION_HEADER_TEXT, expectedCategoryNames, CATALOG_BREADCRUMBS_TEXT, SHOW_MORE_LINK_TEXT, ZATYSHNA_DESCRIPTION_TEXT, ZATYSHNA_ADDITIONAL_TEXT, SUBSCRIPTION_SECTION_BTN_TEXT, SUBSCRIPTION_SECTION_FIELD_MESSAGE_TEXT, TYPE_IN_SUBSCRIPTION_FIELD, SUBSCRIPTION_SECTION_FIELD_ERROR_MESSAGE_TEXT, SUBSCRIPTION_SECTION_TEXT, CONTACT_US_TEXT, CONTACT_US_ADD_TEXT, CONTACT_US_PHONE_NUMBER, FOOTER_GOLOVNA_BUTTON_TEXT, FOOTER_CATALOG_BUTTON_TEXT, FOOTER_ABOUT_US_BUTTON_TEXT, ABOUT_US_URL, FOOTER_CONTACTS_BUTTON_TEXT } from "../../helpers/testDataMainPage.js";
+import { GOLOVNA_BUTTON_TEXT, CATALOG_BUTTON_TEXT, ABOUT_US_BUTTON_TEXT, CONTACTS_BUTTON_TEXT, CART_BUTTON_TEXT, NOVELTIES_SECTION_HEADER_TEXT, LIST_BUTTONS_HEADER, BASE_URL, LIST_BUTTONS_PAGES_URLs_END_POINTS, CONTACTS_URL, CONTACTS_PAGE_HEADER_TEXT, CATALOG_BUTTON_BLACK_TEXT, CATALOG_URL, SEARCH_MESSAGE_TEXT, CATEGORY_SECTION_HEADER_TEXT, expectedCategoryNames, CATALOG_BREADCRUMBS_TEXT, SHOW_MORE_LINK_TEXT, ZATYSHNA_DESCRIPTION_TEXT, ZATYSHNA_ADDITIONAL_TEXT, SUBSCRIPTION_SECTION_BTN_TEXT, SUBSCRIPTION_SECTION_FIELD_MESSAGE_TEXT, TYPE_IN_SUBSCRIPTION_FIELD, SUBSCRIPTION_SECTION_FIELD_ERROR_MESSAGE_TEXT, SUBSCRIPTION_SECTION_TEXT, CONTACT_US_TEXT, CONTACT_US_ADD_TEXT, CONTACT_US_PHONE_NUMBER, FOOTER_GOLOVNA_BUTTON_TEXT, FOOTER_CATALOG_BUTTON_TEXT, FOOTER_ABOUT_US_BUTTON_TEXT, ABOUT_US_URL, FOOTER_CONTACTS_BUTTON_TEXT, FOOTER_LOGO_TEXT, LOGO_TEXT} from "../../helpers/testDataMainPage.js";
 
 
 test.describe('mainPage.spec', () => {
@@ -22,6 +22,7 @@ test.describe('mainPage.spec', () => {
 		const homePage = new HomePage(page);
 
 		await expect(homePage.locators.getLogo()).toBeVisible();
+		await expect(homePage.locators.getFooterLogo()).toHaveText(LOGO_TEXT);
 
 	});
 
@@ -903,7 +904,59 @@ test.describe('mainPage.spec', () => {
 		
 	});
 
+	test('ТС.01.01.72 Verify that the site footer contains the logo', async ({ page }) => {
+		const homePage = new HomePage(page);
 
+		await expect(homePage.locators.getFooterLogo()).toBeVisible();
+		await expect(homePage.locators.getFooterLogo()).toHaveText(FOOTER_LOGO_TEXT);
+		
+	});
+
+	test('ТС.01.01.73 Verify that the page is reset to the top of the page after clicking on the logo', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await homePage.clickFooterLogo();
+
+		await expect(homePage.locators.getMainPageImg()).toBeVisible();
+		
+	});
+
+	test('ТС.01.01.2.2 Verify that the "Main" page contains the image', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getMainPageImg()).toBeVisible();
+		
+	});
+
+	test('ТС.01.01.74 Verify that the site footer contains a "Facebook" button link', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getFacebookBtnLink()).toBeVisible();
+		
+	});
+
+	test('ТС.01.01.75 Verify that the "Facebook" button link has a pointer cursor', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getFacebookBtnLink()).toBeVisible();
+		await expect(homePage.locators.getFacebookBtnLink()).toHaveCSS('cursor', 'pointer');
+		
+	});
+
+	test('ТС.01.01.77 Verify that the site footer contains a "Instagram" button link', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getInstagramBtnLink()).toBeVisible();
+		
+	});
+
+	test('ТС.01.01.78 Verify that the site footer contains a "Instagram" button link', async ({ page }) => {
+		const homePage = new HomePage(page);
+
+		await expect(homePage.locators.getInstagramBtnLink()).toBeVisible();
+		await expect(homePage.locators.getInstagramBtnLink()).toHaveCSS('cursor', 'pointer');
+		
+	});
 
 })
 
