@@ -244,11 +244,11 @@ test.describe('orderPage.spec', () => {
 
     test('TC 04.01.53 Verify that the  mandatory dropdown "Оберить вiддленняi"', async ({ page, addProductCard }) => {
         const ogderPage = new OrderPage(page);
-        await expect(ogderPage.locators.getDepartmentDropdown()).toBeVisible();
-        await expect(ogderPage.locators.getDepartmentDropdown()).toHaveAttribute('placeholder', 'Оберіть відділення');
-        await expect(ogderPage.locators.getDepartmentDropdown()).toHaveCSS('border', '1px solid rgb(22, 11, 3)');
+        await expect(ogderPage.locators.DepartmentDropdown()).toBeVisible();
+        await expect(ogderPage.locators.DepartmentDropdown()).toHaveAttribute('placeholder', 'Оберіть відділення');
+        await expect(ogderPage.locators.DepartmentDropdown()).toHaveCSS('border', '1px solid rgb(22, 11, 3)');
         await ogderPage.clickOrderButton();
-        await expect(ogderPage.locators.getDepartmentDropdown()).toHaveCSS('border', '1px solid rgb(242, 64, 64)')
+        await expect(ogderPage.locators.DepartmentDropdown()).toHaveCSS('border', '1px solid rgb(242, 64, 64)')
 
     });
 
