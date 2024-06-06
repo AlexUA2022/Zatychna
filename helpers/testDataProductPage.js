@@ -17,4 +17,6 @@ export const WAIST_SIZES = ['60-64', '65-70', '71-75', '76-80', '81-85'];
 export const HIP_SIZES = ['85-89', '90-94', '95-98', '99-104', '105-110'];
 export const DIMANTION_GRID_LOGO_TEXT = 'ZATYSHNA';
 export const YOU_MAY_LIKE_BLOCK_HEADER_TEXT = 'Вам може сподобатись';
-export const YOU_MAY_LIKE_BLOCK_PRODUCT_NAME_TEXT = 'Майка Texture з декоративним швом';
+export const PRODUCT_CHARACTERISTICS_DROPDOWN_TEXT = 'Характеристика товару';
+export const DROPDOWN_INFORMATION_TEXT = 'Інформація відсутня';
+export const RULES_OF_CARE_DROPDOWN_TEXT = 'Правила догляду ';

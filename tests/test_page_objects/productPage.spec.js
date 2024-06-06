@@ -247,7 +247,88 @@ test.describe('productPage.spec.spec', () => {
 
 	});
 
+	test('ТС 03.01.26 Verify that the product card contains the "Характеристика товару" dropdown', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
 
+		await expect(productPage.locators.getProductCharacteristicsDropdown()).toBeVisible();
+		await expect(productPage.locators.getProductCharacteristicsDropdown()).toHaveText(PRODUCT_CHARACTERISTICS_DROPDOWN_TEXT);
 
+	});
+
+	test('ТС 03.01.27 Verify that the "Характеристика товару" dropdown contains the select button', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getProductCharacteristicsDropdownSelectBtn()).toBeVisible();
+
+	});
+
+	test('ТС 03.01.28 Verify that the select button has a pointer cursor', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getProductCharacteristicsDropdownSelectBtn()).toBeVisible();
+		await expect(productPage.locators.getProductCharacteristicsDropdownSelectBtn()).toHaveCSS('cursor', 'pointer');
+
+	});
+
+	test('ТС 03.01.29 Verify that the "Характеристика товару" dropdown opens after clicking on the select button', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await productPage.clickProductCharacteristicsDropdownSelectBtn();
+
+		await expect(productPage.locators.getProductCharacteristicsDropdownInformation()).toBeVisible();
+
+	});
+
+	test('ТС 03.01.30 Verify that the "Характеристика товару" dropdown contains the information text', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await productPage.clickProductCharacteristicsDropdownSelectBtn();
+
+		await expect(productPage.locators.getProductCharacteristicsDropdownInformation()).toBeVisible();
+		await expect(productPage.locators.getProductCharacteristicsDropdownInformation()).toHaveText(DROPDOWN_INFORMATION_TEXT);
+
+	});
+
+	test('ТС 03.01.31 Verify that the product card contains the "Правила догляду" dropdown', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getRulesOfCareDropdown()).toBeVisible();
+		await expect(productPage.locators.getRulesOfCareDropdown()).toHaveText(RULES_OF_CARE_DROPDOWN_TEXT);
+
+	});
+
+	test('ТС 03.01.32 Verify that the "Правила догляду" dropdown contains the select button', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getRulesOfCareDropdownSelectBtn()).toBeVisible();
+
+	});
+
+	test('ТС 03.01.33 Verify that the select button has a pointer cursor', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getRulesOfCareDropdownSelectBtn()).toBeVisible();
+		await expect(productPage.locators.getRulesOfCareDropdownSelectBtn()).toHaveCSS('cursor', 'pointer');
+
+	});
+
+	test('ТС 03.01.34 Verify that the "Правила догляду" dropdown opens after clicking on the select button', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await productPage.clickRulesOfCareDropdownSelectBtn();
+
+		await expect(productPage.locators.getRulesOfCareDropdownInformation()).toBeVisible();
+
+	});
+
+	test('ТС 03.01.35 Verify that the "Правила догляду" dropdown contains the information text', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await productPage.clickRulesOfCareDropdownSelectBtn();
+
+		await expect(productPage.locators.getRulesOfCareDropdownInformation()).toBeVisible();
+		await expect(productPage.locators.getRulesOfCareDropdownInformation()).toHaveText(DROPDOWN_INFORMATION_TEXT);
+
+	});
 
 })
