@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { PRODUCT_NAME_TEXT, PRODUCT_PRICE_TEXT, PRODUCT_DESCRIPTION_TEXT, COLOR_SELECTION_BLOCK_HEADER_TEXT, SIZE_SELECTION_BLOCK_HEADER_TEXT } from "../../helpers/testDataProductPage.js";
+import { PRODUCT_NAME_TEXT, PRODUCT_PRICE_TEXT, PRODUCT_DESCRIPTION_TEXT, COLOR_SELECTION_BLOCK_HEADER_TEXT, SIZE_SELECTION_BLOCK_HEADER_TEXT, DIMANTION_GRID_LINK_TEXT } from "../../helpers/testDataProductPage.js";
 import { test, openProductCart } from "../../fixtures/base.js";
 import ProductPage from "../../page_objects/productPage.js";
 
@@ -80,6 +80,22 @@ test.describe('productPage.spec.spec', () => {
 		const productPage = new ProductPage(page);
 
 		await expect(productPage.locators.getSizeSelectionBlockBtns()).toBeVisible();
+
+	});
+
+	test('ТС 03.01.11 Verify that the size button has a pointer cursor', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getSizeSelectionBlockBtn()).toBeVisible();
+		await expect(productPage.locators.getSizeSelectionBlockBtn()).toHaveCSS('cursor', 'pointer');
+
+	});
+
+	test('ТС 03.01.12 Verify that the size selection block contains the "Розмiрна сiтка" link', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getDimensionalGridLink()).toBeVisible();
+		await expect(productPage.locators.getDimensionalGridLink()).toHaveText(DIMANTION_GRID_LINK_TEXT);
 
 	});
 

@@ -13,7 +13,10 @@ class ProductPage {
 		getColorSelectionBtn: () => this.page.locator('.sc-iJrDDk').first(),
 		getSizeSelectionBlock: () => this.page.getByText('РозмірXSSMLРозмірна сітка'),
 		getSizeSelectionBlockHeader: () => this.page.getByText('Розмір', { exact: true }),
-		getSizeSelectionBlockBtns: () => this.page.getByText('XSSML')
+		getSizeSelectionBlockBtns: () => this.page.getByText('XSSML'),
+		getSizeSelectionBlockBtn: () => this.page.getByRole('button', { name: 'XS' }),
+		getDimensionalGridLink: () => this.page.getByRole('button', { name: 'Розмірна сітка' })
+
 	};
 
 	// async clickDropdownSorting() {
