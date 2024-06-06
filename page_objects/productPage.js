@@ -15,14 +15,23 @@ class ProductPage {
 		getSizeSelectionBlockHeader: () => this.page.getByText('Розмір', { exact: true }),
 		getSizeSelectionBlockBtns: () => this.page.getByText('XSSML'),
 		getSizeSelectionBlockBtn: () => this.page.getByRole('button', { name: 'XS' }),
-		getDimensionalGridLink: () => this.page.getByRole('button', { name: 'Розмірна сітка' })
-
+		getDimensionalGridLink: () => this.page.getByRole('button', { name: 'Розмірна сітка' }),
+		getDimensionalGridPopUp: () => this.page.locator('div').filter({ hasText: 'Розмірна сіткаРозмірXSSMLXL' }).nth(2),
+		getDimensionalGridPopUpCloseBtn: () => this.page.locator('#modal-root').getByRole('button'),
+		getDimensionalGridPopUpHeader: () => this.page.getByRole('heading', { name: 'Розмірна сітка' }),
+		getDimensionalGridPopUpFields: (fieldName) => this.page.getByRole('cell', { name: fieldName }),
+		getDimensionalGridPopUpSizes: (fieldName) => this.page.getByRole('cell', { name: fieldName, exact: true })
 	};
 
-	// async clickDropdownSorting() {
-	// 	await this.locators.getDropdownSorting().click();
-	// 	return this;
-	// }
+	async clickDimensionalGridLink() {
+		await this.locators.getDimensionalGridLink().click();
+		return this;
+	}
+
+	async clickDimensionalGridPopUpCloseBtn() {
+		await this.locators.getDimensionalGridPopUpCloseBtn().click();
+		return this;
+	}
 
 }
 

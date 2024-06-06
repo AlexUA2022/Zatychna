@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { PRODUCT_NAME_TEXT, PRODUCT_PRICE_TEXT, PRODUCT_DESCRIPTION_TEXT, COLOR_SELECTION_BLOCK_HEADER_TEXT, SIZE_SELECTION_BLOCK_HEADER_TEXT, DIMANTION_GRID_LINK_TEXT } from "../../helpers/testDataProductPage.js";
+import { PRODUCT_NAME_TEXT, PRODUCT_PRICE_TEXT, PRODUCT_DESCRIPTION_TEXT, COLOR_SELECTION_BLOCK_HEADER_TEXT, SIZE_SELECTION_BLOCK_HEADER_TEXT, DIMANTION_GRID_LINK_TEXT, DIMANTION_GRID_POP_UP_HEADER_TEXT, POP_UP_FIELDS, SIZES } from "../../helpers/testDataProductPage.js";
 import { test, openProductCart } from "../../fixtures/base.js";
 import ProductPage from "../../page_objects/productPage.js";
 
@@ -96,6 +96,83 @@ test.describe('productPage.spec.spec', () => {
 
 		await expect(productPage.locators.getDimensionalGridLink()).toBeVisible();
 		await expect(productPage.locators.getDimensionalGridLink()).toHaveText(DIMANTION_GRID_LINK_TEXT);
+
+	});
+
+	test('ТС 03.01.13 Verify that the "Розмiрна сiтка" pop up opens after clicking on the "Розмiрна сiтка" link', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await productPage.clickDimensionalGridLink();
+
+		await expect(productPage.locators.getDimensionalGridPopUp()).toBeVisible();
+
+	});
+
+	test('ТС 03.01.14 Verify that the "Розмiрна сiтка" pop up contains the close "X" button', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await productPage.clickDimensionalGridLink();
+
+		await expect(productPage.locators.getDimensionalGridPopUpCloseBtn()).toBeVisible();
+
+	});
+
+	test('ТС 03.01.15 Verify that the close "X" button has a pointer cursor', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await productPage.clickDimensionalGridLink();
+
+		await expect(productPage.locators.getDimensionalGridPopUpCloseBtn()).toBeVisible();
+		await expect(productPage.locators.getDimensionalGridPopUpCloseBtn()).toHaveCSS('cursor', 'pointer');
+	});
+
+	test('ТС 03.01.16 Verify that the "Розмiрна сiтка" pop up closes after clicking on the the close "X" button', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await productPage.clickDimensionalGridLink();
+		await productPage.clickDimensionalGridPopUpCloseBtn();
+
+		await expect(productPage.locators.getDimensionalGridPopUp()).not.toBeVisible();
+
+	});
+
+	test('ТС 03.01.17 Verify that the "Розмiрна сiтка" pop up contains the header', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await productPage.clickDimensionalGridLink();
+
+		await expect(productPage.locators.getDimensionalGridPopUpHeader()).toBeVisible();
+		await expect(productPage.locators.getDimensionalGridPopUpHeader()).toHaveText(DIMANTION_GRID_POP_UP_HEADER_TEXT);
+
+	});
+
+	test('ТС 03.01.18 Verify that the "Розмiрна сiтка" pop up contains the "Розмір, Обхват грудей, Обхвати талії, Обхвати бедер" fields', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await productPage.clickDimensionalGridLink();
+
+		for (const field of POP_UP_FIELDS) {
+			const fieldLocator = productPage.locators.getDimensionalGridPopUpFields(field);
+			
+			await expect(fieldLocator).toBeVisible();
+
+			await expect(fieldLocator).toContainText(field);
+		 }
+
+	});
+
+	test('ТС 03.01.19 Verify that the "Розмір" column contains different size', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await productPage.clickDimensionalGridLink();
+
+		for (const field of SIZES) {
+			const fieldLocator = productPage.locators.getDimensionalGridPopUpSizes(field);
+			
+			await expect(fieldLocator).toBeVisible();
+
+			await expect(fieldLocator).toContainText(field);
+		 }
 
 	});
 
