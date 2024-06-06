@@ -22,6 +22,12 @@ class OrderPage {
 		getNumberPhoneField: () => this.page.getByPlaceholder('+38(0__)___-__-__'),
 		getEmailField: () => this.page.getByPlaceholder('E-mail'),
 		getMessageEmailField: () => this.page.getByText('Будь ласка, введіть дійсну адресу електронної пошти'),
+		getBlockDelivery: () => this.page.getByText('2Інформація про доставку'),
+		getPlaceDeliveryDropdown: () => this.page.getByPlaceholder('Оберіть місто доставки'),
+		getChoosingCityDropdown: () => this.page.getByText('м. Львів, Львівська обл'),
+		DepartmentDropdown: () => this.page.getByPlaceholder('Оберіть відділення'),
+		getChoosingDepartmentDropdown:() => this.page.getByText('Відділення №13 (до 30'),
+		getMessageCityDropdown: () => this.page.getByText('Місто не знайдено! Перевірте правильність написання'),
 
     }
 
@@ -75,6 +81,25 @@ class OrderPage {
 		await this.locators.getEmailField().fill('катрусяgmail.com');
 	}
 
+	async fillPlaceDeliveryDropdown() {
+		await this.locators.getPlaceDeliveryDropdown().fill('льв');
+	}
+
+	async clickChoosingCityDropdown() {
+		await this.locators.getChoosingCityDropdown().click();
+	}
+
+	async clickDepartmentDropdown() {
+		await this.locators.DepartmentDropdown().click();
+	}
+
+	async clickChoosingDepartmentDropdown() {
+		await this.locators.getChoosingDepartmentDropdown().click();
+	}
+
+	async filldigitPlaceDeliveryDropdown() {
+		await this.locators.getPlaceDeliveryDropdown().fill('123');
+	}
 
 
 
