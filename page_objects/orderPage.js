@@ -28,6 +28,11 @@ class OrderPage {
 		DepartmentDropdown: () => this.page.getByPlaceholder('Оберіть відділення'),
 		getChoosingDepartmentDropdown:() => this.page.getByText('Відділення №13 (до 30'),
 		getMessageCityDropdown: () => this.page.getByText('Місто не знайдено! Перевірте правильність написання'),
+		getCheckBoxMandatory: () => this.page.getByText('Я погоджуюсь з договором оферти і політикою конфіденційності *'),
+		getCheckbox: () => this.page.getByText('Зателефонуйте мені для уточнення деталей замовлення'),
+		getBlockPayment: () => this.page.getByText('3Оплата'),
+		getCheckboxPayment: () => this.page.getByText('Оплата за реквізитамиОплата при отриманні'),
+		getSuccessfulOrder: () => this.page.getByRole('main').getByRole('img')
 
     }
 
@@ -99,6 +104,24 @@ class OrderPage {
 
 	async filldigitPlaceDeliveryDropdown() {
 		await this.locators.getPlaceDeliveryDropdown().fill('123');
+	}
+
+	async fillLastNameField() {
+		await this.locators.getNameField().fill('Полиит');
+	}
+
+	async fillNameField() {
+		await this.locators.getName2Field().fill('Катерина');
+	}
+	async fillEmailField() {
+		await this.locators.getEmailField().fill('kati@gmailcom');
+	}
+
+	async clickCheckBoxMandatory() {
+		await this.locators.getCheckBoxMandatory().click();
+	}
+	async fillnewEmailField() {
+		await this.locators.getEmailField().fill('katerinapollit@gmail.com');
 	}
 
 
