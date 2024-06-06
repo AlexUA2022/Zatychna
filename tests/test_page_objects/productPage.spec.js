@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { PRODUCT_NAME_TEXT, PRODUCT_PRICE_TEXT, PRODUCT_DESCRIPTION_TEXT } from "../../helpers/testDataProductPage.js";
+import { PRODUCT_NAME_TEXT, PRODUCT_PRICE_TEXT, PRODUCT_DESCRIPTION_TEXT, COLOR_SELECTION_BLOCK_HEADER_TEXT, SIZE_SELECTION_BLOCK_HEADER_TEXT } from "../../helpers/testDataProductPage.js";
 import { test, openProductCart } from "../../fixtures/base.js";
 import ProductPage from "../../page_objects/productPage.js";
 
@@ -30,5 +30,57 @@ test.describe('productPage.spec.spec', () => {
 
 	});
 
+	test('ТС 03.01.4 Verify that the product card contains a color selection block', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getColorSelectionBlock()).toBeVisible();
+
+	});
+
+	test('ТС 03.01.5 Verify that the color selection block contains a header', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getColorSelectionBlockHeader()).toBeVisible();
+		await expect(productPage.locators.getColorSelectionBlockHeader()).toHaveText(COLOR_SELECTION_BLOCK_HEADER_TEXT);
+
+	});
+
+	test('ТС 03.01.6 Verify that the color selection block contains buttons for different colors', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getColorSelectionBtns()).toBeVisible();
+
+	});
+
+	test('ТС 03.01.7 Verify that the color button has a pointer cursor', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getColorSelectionBtn()).toBeVisible();
+		await expect(productPage.locators.getColorSelectionBtn()).toHaveCSS('cursor', 'pointer');
+		await expect(productPage.locators.getColorSelectionBtn()).toHaveCSS('background', 'rgb(255, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box');
+
+	});
+
+	test('ТС 03.01.8 Verify that the product card contains a size selection block', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getSizeSelectionBlock()).toBeVisible();
+
+	});
+
+	test('ТС 03.01.9 Verify that the size selection block contains a header', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getSizeSelectionBlockHeader()).toBeVisible();
+		await expect(productPage.locators.getSizeSelectionBlockHeader()).toHaveText(SIZE_SELECTION_BLOCK_HEADER_TEXT);
+
+	});
+
+	test('ТС 03.01.10 Verify that the size selection block contains buttons for different sizes', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getSizeSelectionBlockBtns()).toBeVisible();
+
+	});
 
 })
