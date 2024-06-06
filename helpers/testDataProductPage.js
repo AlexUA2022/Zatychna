@@ -9,3 +9,6 @@ export const PRODUCT_DESCRIPTION_TEXT = 'Однотонна базова фут�
 export const COLOR_SELECTION_BLOCK_HEADER_TEXT = 'Колір';
 export const SIZE_SELECTION_BLOCK_HEADER_TEXT = 'Розмір';
 export const DIMANTION_GRID_LINK_TEXT = 'Розмірна сітка';
+export const DIMANTION_GRID_POP_UP_HEADER_TEXT = 'Розмірна сітка';
+export const POP_UP_FIELDS = ['Розмір', 'Обхват грудей', 'Обхвати талії', 'Обхвати бедер'];
+export const SIZES = ['XS', 'S', 'M', 'L', 'XL'];
