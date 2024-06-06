@@ -20,7 +20,15 @@ class ProductPage {
 		getDimensionalGridPopUpCloseBtn: () => this.page.locator('#modal-root').getByRole('button'),
 		getDimensionalGridPopUpHeader: () => this.page.getByRole('heading', { name: 'Розмірна сітка' }),
 		getDimensionalGridPopUpFields: (fieldName) => this.page.getByRole('cell', { name: fieldName }),
-		getDimensionalGridPopUpSizes: (fieldName) => this.page.getByRole('cell', { name: fieldName, exact: true })
+		getDimensionalGridPopUpSizes: (fieldName) => this.page.getByRole('cell', { name: fieldName, exact: true }),
+		getDimensionalGridChestSizes: (fieldName) => this.page.getByRole('cell', { name: fieldName, exact: true }),
+		getDimensionalGridWaistSizes: (fieldName) => this.page.getByRole('cell', { name: fieldName, exact: true }),
+		getDimensionalGridHipSizes: (fieldName) => this.page.getByRole('cell', { name: fieldName, exact: true }),
+		getDimensionalGridLogo: () => this.page.getByText('ZATYSHNA', { exact: true }),
+		getProductImg: () => this.page.getByRole('img', { name: 'RED' }).first(),
+		getYouMayLikeBlock: () => this.page.getByText('Вам може сподобатисьМайка'),
+		getYouMayLikeBlockHeader: () => this.page.getByRole('heading', { name: 'Вам може сподобатись' }),
+		getYouMayLikeProductImg: () => this.page.getByRole('link', { name: 'Майка Texture' }).first()
 	};
 
 	async clickDimensionalGridLink() {

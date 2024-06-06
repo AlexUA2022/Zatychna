@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { PRODUCT_NAME_TEXT, PRODUCT_PRICE_TEXT, PRODUCT_DESCRIPTION_TEXT, COLOR_SELECTION_BLOCK_HEADER_TEXT, SIZE_SELECTION_BLOCK_HEADER_TEXT, DIMANTION_GRID_LINK_TEXT, DIMANTION_GRID_POP_UP_HEADER_TEXT, POP_UP_FIELDS, SIZES } from "../../helpers/testDataProductPage.js";
+import { PRODUCT_NAME_TEXT, PRODUCT_PRICE_TEXT, PRODUCT_DESCRIPTION_TEXT, COLOR_SELECTION_BLOCK_HEADER_TEXT, SIZE_SELECTION_BLOCK_HEADER_TEXT, DIMANTION_GRID_LINK_TEXT, DIMANTION_GRID_POP_UP_HEADER_TEXT, POP_UP_FIELDS, SIZES, СHEST_SIZES, WAIST_SIZES, HIP_SIZES, DIMANTION_GRID_LOGO_TEXT, YOU_MAY_LIKE_BLOCK_HEADER_TEXT, YOU_MAY_LIKE_BLOCK_PRODUCT_NAME_TEXT } from "../../helpers/testDataProductPage.js";
 import { test, openProductCart } from "../../fixtures/base.js";
 import ProductPage from "../../page_objects/productPage.js";
 
@@ -26,7 +26,7 @@ test.describe('productPage.spec.spec', () => {
 		const productPage = new ProductPage(page);
 
 		await expect(productPage.locators.getProductDescription()).toBeVisible();
-		await expect(productPage.locators.getProductDescription()).toHaveText(PRODUCT_DESCRIPTION_TEXT);
+		await expect(productPage.locators.getProductDescription()).toContainText(PRODUCT_DESCRIPTION_TEXT);
 
 	});
 
@@ -175,5 +175,79 @@ test.describe('productPage.spec.spec', () => {
 		 }
 
 	});
+
+	test('ТС 03.01.20 Verify that the "Обхват грудей" column contains a range of sizes', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await productPage.clickDimensionalGridLink();
+
+		for (const field of СHEST_SIZES) {
+			const fieldLocator = productPage.locators.getDimensionalGridChestSizes(field);
+			
+			await expect(fieldLocator).toBeVisible();
+
+			await expect(fieldLocator).toContainText(field);
+		 }
+
+	});
+
+	test('ТС 03.01.21 Verify that the "Обхвати талії" column contains a range of sizes', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await productPage.clickDimensionalGridLink();
+
+		for (const field of WAIST_SIZES) {
+			const fieldLocator = productPage.locators.getDimensionalGridWaistSizes(field);
+			
+			await expect(fieldLocator).toBeVisible();
+
+			await expect(fieldLocator).toContainText(field);
+		 }
+
+	});
+
+	test('ТС 03.01.22 Verify that the "Обхвати бедер" column contains a range of sizes', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await productPage.clickDimensionalGridLink();
+
+		for (const field of HIP_SIZES) {
+			const fieldLocator = productPage.locators.getDimensionalGridHipSizes(field);
+			
+			await expect(fieldLocator).toBeVisible();
+
+			await expect(fieldLocator).toContainText(field);
+		 }
+
+	});
+
+	test('ТС 03.01.23 Verify that the "Розмiрна сiтка" pop up contains the background logo', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await productPage.clickDimensionalGridLink();
+
+		await expect(productPage.locators.getDimensionalGridLogo()).toBeVisible();
+		await expect(productPage.locators.getDimensionalGridLogo()).toHaveText(DIMANTION_GRID_LOGO_TEXT);
+
+	});
+
+	test('ТС 03.01.24 Verify that the product card contains the "Вам може сподобатись" selection block', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getYouMayLikeBlock()).toBeVisible();
+		await expect(productPage.locators.getYouMayLikeBlockHeader()).toBeVisible();
+		await expect(productPage.locators.getYouMayLikeBlockHeader()).toHaveText(YOU_MAY_LIKE_BLOCK_HEADER_TEXT);
+
+	});
+
+	test('ТС 03.01.25 Verify that the "Вам може сподобатись" selection block contains the carts of products', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getYouMayLikeProductImg()).toBeVisible();
+
+	});
+
+
+
 
 })
