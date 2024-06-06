@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import HomePage from "../../page_objects/homePage.js";
-import { HEANDING_TEXT, PRODUCT_NAME, COLOR_PRODUCT, PERSON_DATA, MESSAGE_EMAIL, MESSAGE_WARNING } from "../../helpers/testDataOrderPage.js";
+import { HEANDING_TEXT, PRODUCT_NAME, COLOR_PRODUCT, PERSON_DATA, DELIVERY_TEXT, MESSAGE_WARNING, MESSAGE_CITY_DROPDOWN } from "../../helpers/testDataOrderPage.js";
 import CatalogPage from "../../page_objects/catalogPage.js";
 import QuiltedJacketPage from "../../page_objects/guiltedJacket.js";
 import PopupShoppingCartWndowPage from "../../page_objects/pop-upShoppingCartWndow.js";
@@ -216,6 +216,62 @@ test.describe('orderPage.spec', () => {
         await expect(ogderPage.locators.getMessageEmailField()).toBeTruthy()
 
     });
+
+    test('TC 04.01.50 Verify that the a section "Інформація про доставку"', async ({ page, addProductCard }) => {
+        const ogderPage = new OrderPage(page);
+        await expect(ogderPage.locators.getBlockDelivery()).toBeVisible();
+        await expect(ogderPage.locators.getBlockDelivery()).toHaveText(DELIVERY_TEXT)
+    });
+
+    test('TC 04.01.51 Verify that the the mandatory dropdown "Обeрить место доставки"', async ({ page, addProductCard }) => {
+        const ogderPage = new OrderPage(page);
+        await expect(ogderPage.locators.getPlaceDeliveryDropdown()).toBeVisible();
+        await expect(ogderPage.locators.getPlaceDeliveryDropdown()).toHaveAttribute('placeholder', 'Оберіть місто доставки');
+        await expect(ogderPage.locators.getPlaceDeliveryDropdown()).toHaveCSS('border', '1px solid rgb(22, 11, 3)');
+        await ogderPage.clickOrderButton();
+        await expect(ogderPage.locators.getPlaceDeliveryDropdown()).toHaveCSS('border', '1px solid rgb(242, 64, 64)')
+
+    });
+
+    test('TC 04.01.52 Verify that the  user can select a city from the dropdown dropdown by entering the first letters of the delivery city', async ({ page, addProductCard }) => {
+        const ogderPage = new OrderPage(page);
+        await ogderPage.fillPlaceDeliveryDropdown();
+        await page.waitForTimeout(2000);
+        await ogderPage.clickChoosingCityDropdown();
+        await expect(ogderPage.locators.getPlaceDeliveryDropdown()).toBeAttached();
+
+    });
+
+    test('TC 04.01.53 Verify that the  mandatory dropdown "Оберить вiддленняi"', async ({ page, addProductCard }) => {
+        const ogderPage = new OrderPage(page);
+        await expect(ogderPage.locators.DepartmentDropdown()).toBeVisible();
+        await expect(ogderPage.locators.DepartmentDropdown()).toHaveAttribute('placeholder', 'Оберіть відділення');
+        await expect(ogderPage.locators.DepartmentDropdown()).toHaveCSS('border', '1px solid rgb(22, 11, 3)');
+        await ogderPage.clickOrderButton();
+        await expect(ogderPage.locators.DepartmentDropdown()).toHaveCSS('border', '1px solid rgb(242, 64, 64)')
+
+    });
+
+    test('TC 04.01.54 Verify that the  user can select a destination from the dropdown dropdown, after selecting the delivery city', async ({ page, addProductCard }) => {
+        const ogderPage = new OrderPage(page);
+        await ogderPage.fillPlaceDeliveryDropdown();
+        await page.waitForTimeout(2000);
+        await ogderPage.clickChoosingCityDropdown();
+        await ogderPage.clickDepartmentDropdown();
+        await ogderPage.clickChoosingDepartmentDropdown();
+        await expect(ogderPage.locators.DepartmentDropdown()).toBeAttached();
+
+    });
+
+    test('TC 04.01.55 Verify that thedropdown "Обмерить место доставки" does not accept numbers, a warning message has been received', async ({ page, addProductCard }) => {
+        const ogderPage = new OrderPage(page);
+        await ogderPage.filldigitPlaceDeliveryDropdown();
+        await expect(ogderPage.locators.getMessageCityDropdown()).toBeVisible()
+        await expect(ogderPage.locators.getMessageCityDropdown()).toHaveText(MESSAGE_CITY_DROPDOWN);
+
+    });
+
+
 
 
 })
