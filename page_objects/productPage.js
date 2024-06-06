@@ -28,7 +28,13 @@ class ProductPage {
 		getProductImg: () => this.page.getByRole('img', { name: 'RED' }).first(),
 		getYouMayLikeBlock: () => this.page.getByText('Вам може сподобатисьМайка'),
 		getYouMayLikeBlockHeader: () => this.page.getByRole('heading', { name: 'Вам може сподобатись' }),
-		getYouMayLikeProductImg: () => this.page.getByRole('link', { name: 'Майка Texture' }).first()
+		getYouMayLikeProductImg: () => this.page.getByRole('link', { name: 'Майка Texture' }).first(),
+		getProductCharacteristicsDropdown: () => this.page.locator('div').filter({ hasText: /^Характеристика товару$/ }).nth(1),
+		getProductCharacteristicsDropdownSelectBtn: () => this.page.locator('button[name="characteristic"]'),
+		getProductCharacteristicsDropdownInformation: () => this.page.getByText('Інформація відсутня'),
+		getRulesOfCareDropdown: () => this.page.getByRole('main').locator('div').filter({ hasText: 'Правила догляду' }).nth(3),
+		getRulesOfCareDropdownSelectBtn: () => this.page.locator('button[name="regulations"]'),
+		getRulesOfCareDropdownInformation: () => this.page.locator('.sc-dxfSRF').last()
 	};
 
 	async clickDimensionalGridLink() {
@@ -38,6 +44,16 @@ class ProductPage {
 
 	async clickDimensionalGridPopUpCloseBtn() {
 		await this.locators.getDimensionalGridPopUpCloseBtn().click();
+		return this;
+	}
+
+	async clickProductCharacteristicsDropdownSelectBtn() {
+		await this.locators.getProductCharacteristicsDropdownSelectBtn().click();
+		return this;
+	}
+
+	async clickRulesOfCareDropdownSelectBtn() {
+		await this.locators.getRulesOfCareDropdownSelectBtn().click();
 		return this;
 	}
 
