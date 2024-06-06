@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import HomePage from "../../page_objects/homePage.js";
-import { HEANDING_TEXT, PRODUCT_NAME, COLOR_PRODUCT, PERSON_DATA, DELIVERY_TEXT, MESSAGE_WARNING, MESSAGE_CITY_DROPDOWN } from "../../helpers/testDataOrderPage.js";
+import { HEANDING_TEXT, PRODUCT_NAME, COLOR_PRODUCT, PERSON_DATA, DELIVERY_TEXT, MESSAGE_WARNING, MESSAGE_CITY_DROPDOWN, CHECKBOX_MANDATORY, CHECKBOX, PAYMENT_TEXT, CHECKBOX_PAYMENT_TEXT, PLACE_ORDER_BUTTON_TEXT, RANDOM_EMAIL } from "../../helpers/testDataOrderPage.js";
 import CatalogPage from "../../page_objects/catalogPage.js";
 import QuiltedJacketPage from "../../page_objects/guiltedJacket.js";
 import PopupShoppingCartWndowPage from "../../page_objects/pop-upShoppingCartWndow.js";
@@ -270,6 +270,70 @@ test.describe('orderPage.spec', () => {
         await expect(ogderPage.locators.getMessageCityDropdown()).toHaveText(MESSAGE_CITY_DROPDOWN);
 
     });
+
+    test('TC 04.01.66 Verify that it contains a mandatory checkbox "Я погоджуюсь з договором оферты і політикою конфіденційності"', async ({ page, addProductCard }) => {
+        const ogderPage = new OrderPage(page);
+        await expect(ogderPage.locators.getCheckBoxMandatory()).toBeVisible();
+        await expect(ogderPage.locators.getCheckBoxMandatory()).toHaveText(CHECKBOX_MANDATORY);
+        await expect(ogderPage.locators.getCheckBoxMandatory()).toHaveCSS('border', '0px none rgb(157, 154, 151)');
+        await ogderPage.clickOrderButton();
+        await expect(ogderPage.locators.getCheckBoxMandatory()).toHaveCSS('border', '0px none rgb(255, 0, 0)')
+
+
+    });
+
+    test('TC 04.01.67 Verify that the checkbox "Зателефонуйте мені для уточнення деталей замовлення"contains', async ({ page, addProductCard }) => {
+        const ogderPage = new OrderPage(page);
+        await expect(ogderPage.locators.getCheckbox()).toBeVisible();
+        await expect(ogderPage.locators.getCheckbox()).toHaveText(CHECKBOX);
+        await expect(ogderPage.locators.getCheckbox()).toHaveCSS('border', '0px none rgb(157, 154, 151)');
+
+    });
+
+    test('TC 04.01.59 Verify that the is a "Оплата"section.', async ({ page, addProductCard }) => {
+        const ogderPage = new OrderPage(page);
+        await expect(ogderPage.locators.getBlockPayment()).toBeVisible();
+        await expect(ogderPage.locators.getBlockPayment()).toHaveText(PAYMENT_TEXT);
+
+    });
+
+    test('TC 04.01.60 Verify that the "payment by details", radiobatton, "payment upon receipt", radiobatton are set by default.', async ({ page, addProductCard }) => {
+        const ogderPage = new OrderPage(page);
+        await expect(ogderPage.locators.getCheckboxPayment()).toBeVisible();
+        await expect(ogderPage.locators.getCheckboxPayment()).toHaveText(CHECKBOX_PAYMENT_TEXT);
+        await expect(ogderPage.locators.getCheckboxPayment()).toBeEditable();
+
+    });
+
+    test('TC 04.01.63 Verify that the page contains the "Оформити замовлення"button.', async ({ page, addProductCard }) => {
+        const ogderPage = new OrderPage(page);
+        await expect(ogderPage.locators.getOrderButton()).toBeVisible();
+        await expect(ogderPage.locators.getOrderButton()).toHaveCSS('background', 'rgb(22, 11, 3) none repeat scroll 0% 0% / auto padding-box border-box');
+        await expect(ogderPage.locators.getOrderButton()).toHaveText(PLACE_ORDER_BUTTON_TEXT);
+        await expect(ogderPage.locators.getOrderButton()).toHaveCSS('cursor', 'pointer');
+
+    });
+
+   test("TC 04.01.64 Verify that thepage opens with information about the successful order, the user clicked on the button'Оформити замовлення'", async ({ page, addProductCard }) => {
+    const ogderPage = new OrderPage(page);
+    await ogderPage.fillLastNameField();
+    await ogderPage.fillNameField();
+    await ogderPage.fillNumberPhoneField();
+    await ogderPage.fillnewEmailField(RANDOM_EMAIL);
+    await ogderPage.fillPlaceDeliveryDropdown();
+    await ogderPage.clickChoosingCityDropdown();
+    await page.waitForTimeout(2000);
+    await ogderPage.clickDepartmentDropdown()
+    await ogderPage.clickChoosingDepartmentDropdown();
+    await ogderPage.clickCheckBoxMandatory();
+    await ogderPage.clickOrderButton();
+    await page.waitForTimeout(5000);
+    await expect(ogderPage.locators.getSuccessfulOrder()).toBeVisible();
+
+   })
+
+
+
 
 
 
