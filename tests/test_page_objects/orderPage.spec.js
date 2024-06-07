@@ -46,7 +46,7 @@ test.describe('orderPage.spec', () => {
         const ogderPage = new OrderPage(page);
 
         await expect(ogderPage.locators.getProductSize()).toBeVisible();
-        await expect(ogderPage.locators.getProductSize()).toHaveText('S');
+        await expect(ogderPage.locators.getProductSize()).toHaveText('L');
 
     });
 

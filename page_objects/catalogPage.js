@@ -30,7 +30,8 @@ class CatalogPage {
 		getLastPagePangination: () => this.page.getByRole('button', { name: '8' }),
 		getBackPagesForward: () => this.page.locator('.sc-dxfSRF').first(),
 		getJacketProduct: () => this.page.getByRole('link', { name: 'Куртка Quilted з капюшоно...' }),
-		getFooterGolovnaBtn: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Головна' })
+		getFooterGolovnaBtn: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Головна' }),
+		getJacketBasic: () => this.page.getByRole('link', { name: 'Куртка Basic однотонна з ...' }).first()
 	};
 
 	async clickDropdownSorting() {
@@ -63,6 +64,11 @@ class CatalogPage {
 	async clickFooterGolovnaBtn() {
 		await this.locators.getFooterGolovnaBtn().click();
 		return new HomePage(this.page);
+	}
+
+	async clickJacketBasic() {
+		await this.locators.getJacketBasic().click();
+		return new QuiltedJacketPage(this.page);
 	}
 
 }
