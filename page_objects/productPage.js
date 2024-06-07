@@ -34,7 +34,13 @@ class ProductPage {
 		getProductCharacteristicsDropdownInformation: () => this.page.getByText('Інформація відсутня'),
 		getRulesOfCareDropdown: () => this.page.getByRole('main').locator('div').filter({ hasText: 'Правила догляду' }).nth(3),
 		getRulesOfCareDropdownSelectBtn: () => this.page.locator('button[name="regulations"]'),
-		getRulesOfCareDropdownInformation: () => this.page.locator('.sc-dxfSRF').last()
+		getRulesOfCareDropdownInformation: () => this.page.locator('.sc-dxfSRF').last(),
+		getProductImgs: () => this.page.locator('.swiper-wrapper'),
+		getAddToCartBtn: () => this.page.getByRole('button', { name: 'Додати в кошик' }),
+		getErrorMessage: () => this.page.getByText('Оберіть розмір, щоб додати в кошик'),
+		getDropdownCart: () => this.page.getByText('Футболка Obs...REDXS1 x 650 UAHРазом:650 UAHОформити замовленняКошик'),
+		getSuccessfulMessage: () => this.page.getByText('Товар додано в кошик'),
+		getCounterBtn: () => this.page.locator('div[style="position: relative;"]>div')
 	};
 
 	async clickDimensionalGridLink() {
@@ -56,6 +62,17 @@ class ProductPage {
 		await this.locators.getRulesOfCareDropdownSelectBtn().click();
 		return this;
 	}
+
+	async clickAddToCartBtn() {
+		await this.locators.getAddToCartBtn().click();
+		return this;
+	}
+
+	async clickSizeSelectionBlockBtn() {
+		await this.locators.getSizeSelectionBlockBtn().click();
+		return this;
+	}
+
 
 }
 

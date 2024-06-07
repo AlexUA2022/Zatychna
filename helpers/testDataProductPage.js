@@ -2,7 +2,6 @@
 
 
 //test data
-
 export const PRODUCT_NAME_TEXT = 'Футболка Obsessed with fashion';
 export const PRODUCT_PRICE_TEXT = '650 UAH';
 export const PRODUCT_DESCRIPTION_TEXT = 'Однотонна базова футболка з написом спереду. Модель приталеного крою з круглою горловиною та короткими рукавами.';
@@ -20,3 +19,6 @@ export const YOU_MAY_LIKE_BLOCK_HEADER_TEXT = 'Вам може сподобат�
 export const PRODUCT_CHARACTERISTICS_DROPDOWN_TEXT = 'Характеристика товару';
 export const DROPDOWN_INFORMATION_TEXT = 'Інформація відсутня';
 export const RULES_OF_CARE_DROPDOWN_TEXT = 'Правила догляду ';
+export const ADD_TO_CART_BUTTON_TEXT = 'Додати в кошик';
+export const ERROR_MESSAGE_TEXT = 'Оберіть розмір, щоб додати в кошик';
+export const SUCCESSFUL_MESSAGE_TEXT = 'Товар додано в кошик';
