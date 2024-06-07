@@ -1,3 +1,5 @@
+import CatalogPage from "./catalogPage";
+
 class ProductPage {
 	constructor(page) {
 		this.page = page;
@@ -40,7 +42,14 @@ class ProductPage {
 		getErrorMessage: () => this.page.getByText('Оберіть розмір, щоб додати в кошик'),
 		getDropdownCart: () => this.page.getByText('Футболка Obs...REDXS1 x 650 UAHРазом:650 UAHОформити замовленняКошик'),
 		getSuccessfulMessage: () => this.page.getByText('Товар додано в кошик'),
-		getCounterBtn: () => this.page.locator('div[style="position: relative;"]>div')
+		getCounterBtn: () => this.page.locator('div[style="position: relative;"]>div'),
+		getAddBtn: () => this.page.locator('div[style="position: relative;"]>div [value="false"]'),
+		// getSubtractBtn: () => this.page.locator('div[style="position: relative;"] button.gjGmUn')
+		getCartIcon: () => this.page.getByRole('link', { name: '3 Кошик' }),
+		getDropdownCartItems: () => this.page.getByText('x 650 UAH'),
+		getCatalogPage: () => this.page.getByRole('banner').getByRole('link', { name: 'Каталог' }),
+		getBreadcrumbs: () => this.page.getByText('ГоловнаКаталогФутболки'),
+		getCatalogBreadcrumbs: () => this.page.getByRole('main').getByRole('link', { name: 'Каталог' }),
 	};
 
 	async clickDimensionalGridLink() {
@@ -73,6 +82,20 @@ class ProductPage {
 		return this;
 	}
 
+	async clickAddBtn() {
+		await this.locators.getAddBtn().click();
+		return this;
+	}
+
+	async clickCatalogPage() {
+		await this.locators.getCatalogPage().click();
+		return new CatalogPage(this.page);
+	}
+
+	async clickCatalogBreadcrumbs() {
+		await this.locators.getCatalogBreadcrumbs().click();
+		return new CatalogPage(this.page);
+	}
 
 }
 
