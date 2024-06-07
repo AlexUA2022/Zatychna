@@ -1,5 +1,6 @@
 import { expect } from "@playwright/test";
 import { PRODUCT_NAME_TEXT, PRODUCT_PRICE_TEXT, PRODUCT_DESCRIPTION_TEXT, COLOR_SELECTION_BLOCK_HEADER_TEXT, SIZE_SELECTION_BLOCK_HEADER_TEXT, DIMANTION_GRID_LINK_TEXT, DIMANTION_GRID_POP_UP_HEADER_TEXT, POP_UP_FIELDS, SIZES, СHEST_SIZES, WAIST_SIZES, HIP_SIZES, DIMANTION_GRID_LOGO_TEXT, YOU_MAY_LIKE_BLOCK_HEADER_TEXT, PRODUCT_CHARACTERISTICS_DROPDOWN_TEXT, DROPDOWN_INFORMATION_TEXT, RULES_OF_CARE_DROPDOWN_TEXT, ADD_TO_CART_BUTTON_TEXT, ERROR_MESSAGE_TEXT, SUCCESSFUL_MESSAGE_TEXT } from "../../helpers/testDataProductPage.js";
+import { NOT_AVAILABLE_ITEM_TEXT } from "../../helpers/testDataCatalogPage.js"
 import { test, openProductCart } from "../../fixtures/base.js";
 import ProductPage from "../../page_objects/productPage.js";
 
@@ -390,5 +391,90 @@ test.describe('productPage.spec.spec', () => {
 		await expect(productPage.locators.getCounterBtn()).toHaveText('1');
 
 	});
+
+	test('ТС 03.01.43 Verify that the counter button contains the " + " button', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getAddBtn()).toBeVisible();
+
+	});
+
+	test('ТС 03.01.44 Verify that the " + " button has a pointer cursor', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getAddBtn()).toBeVisible();
+		await expect(productPage.locators.getAddBtn()).toHaveCSS('cursor', 'pointer');
+
+	});
+
+	test('ТС 03.01.47 Verify that value increases by 1 after clicking on the " + " button', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await productPage.clickAddBtn();
+
+		await expect(productPage.locators.getCounterBtn()).toBeVisible();
+		await expect(productPage.locators.getCounterBtn()).toHaveText('2');
+
+	});
+
+	test('ТС 03.01.49 Verify that three items are displayed in the cart after adding three items by the " + " button', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await productPage.clickSizeSelectionBlockBtn();
+		await productPage.clickAddBtn();
+		await productPage.clickAddBtn();
+		await productPage.clickAddToCartBtn();
+
+		await expect(productPage.locators.getCounterBtn()).toHaveText('3');
+		await expect(productPage.locators.getCartIcon()).toBeVisible();
+		await expect(productPage.locators.getDropdownCartItems()).toBeVisible();
+
+	});
+
+	test('ТС 03.01.50 Verify that the “Out of stock” status is present if the product is not available', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		const catalogPage = await productPage.clickCatalogPage();
+		await catalogPage.clickTshirtsBtn();
+		await catalogPage.clickINSPOTshirtsItem();
+
+		await expect(catalogPage.locators.getNotAvailableItemText()).toBeVisible();
+		await expect(catalogPage.locators.getNotAvailableItemText()).toHaveText(NOT_AVAILABLE_ITEM_TEXT);
+
+	});
+
+	test('ТС 03.01.51 Verify that the "Додати в кошик" button is not active (hasn\'t a cursor pointer)', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		const catalogPage = await productPage.clickCatalogPage();
+		await catalogPage.clickTshirtsBtn();
+		await catalogPage.clickINSPOTshirtsItem();
+
+		await expect(catalogPage.locators.getAddToCartBtn()).toBeVisible();
+		await expect(catalogPage.locators.getAddToCartBtn()).not.toHaveCSS('cursor', 'pointer');
+	});
+
+	test('ТС 03.01.52 Verify that the product card contains the breadcrumbs', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getBreadcrumbs()).toBeVisible();
+
+	});
+
+	test('ТС 03.01.53 Verify that the user can navigate by breadcrumbs', async ({ page, openProductCart }) => {
+		const productPage = new ProductPage(page);
+
+		await expect(productPage.locators.getCatalogBreadcrumbs()).toBeVisible();
+
+		const catalogPage = await productPage.clickCatalogBreadcrumbs();
+
+		await expect(catalogPage.locators.getGolovnaBreadcrumbs()).toBeVisible();
+
+		const homePage = await catalogPage.clickGolovnaBreadcrumbs();
+
+		await expect(homePage.locators.getMainPageImg()).toBeVisible();
+
+	});
+
 
 })
