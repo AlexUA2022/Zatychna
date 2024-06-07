@@ -34,8 +34,8 @@ class CatalogPage {
 		getINSPOTshirtsItem: () => this.page.getByRole('link', { name: 'Футболка оверсайз з вишит...' }).nth(2),
 		getNotAvailableItemText: () => this.page.getByText('Немає в наявності'),
 		getAddToCartBtn: () => this.page.getByRole('button', { name: 'Додати в кошик' }),
-		getGolovnaBreadcrumbs: () => this.page.getByRole('main').getByRole('link', { name: 'Головна' })
-
+		getGolovnaBreadcrumbs: () => this.page.getByRole('main').getByRole('link', { name: 'Головна' }),
+		getJacketBasic: () => this.page.getByRole('link', { name: 'Куртка Basic однотонна з ...' }).first()
 	};
 
 	async clickDropdownSorting() {
@@ -81,6 +81,11 @@ class CatalogPage {
 	async clickGolovnaBreadcrumbs() {
 		await this.locators.getGolovnaBreadcrumbs().click();
 		return new HomePage(this.page);
+	}
+
+	async clickJacketBasic() {
+		await this.locators.getJacketBasic().click();
+		return new QuiltedJacketPage(this.page);
 	}
 
 }
