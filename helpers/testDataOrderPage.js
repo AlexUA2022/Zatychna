@@ -4,7 +4,7 @@
 // test data
 
 export const HEANDING_TEXT = 'Ваше замовлення';
-export const PRODUCT_NAME = 'Куртка Qui...';
+export const PRODUCT_NAME = 'Куртка Bas...';
 export const COLOR_PRODUCT = 'BLACK';
 export const PERSON_DATA = '1Особисті дані';
 export const NAME_FIELD_TEXT = 'Прізвище *';

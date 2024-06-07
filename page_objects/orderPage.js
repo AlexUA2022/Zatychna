@@ -8,9 +8,9 @@ class OrderPage {
     locators = {
 		getHeadingText: () => this.page.getByRole('heading', { name: 'Ваше замовлення' }),
 		getPhotoImages: ()  => this.page.locator('img'),
-		getProductName:  ()  => this.page.getByRole('heading', { name: 'Куртка Qui...' }),
+		getProductName:  ()  => this.page.getByRole('heading', { name: 'Куртка Bas...' }),
 		getColorProduct: ()  => this.page.getByText('BLACK'),
-		getProductSize: ()  => this.page.getByText('S', { exact: true }),
+		getProductSize: ()  => this.page.locator('#root').getByText('L', { exact: true }),
 		getQuantityProduct: ()  => this.page.getByText('x'),
 		getCostProduct: () => this.page.getByText('990 UAH').first(),
 		getInformationSctionProduct: () => this.page.locator('section').filter({ hasText: '1 товари(-ів) на суму3 990' }),

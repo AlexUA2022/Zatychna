@@ -10,6 +10,7 @@ import OrderPage from "../page_objects/orderPage";
 
 
 
+
 export const test = base.extend({
     addProductCard: [
         async ({ page }, use) => {
@@ -17,15 +18,15 @@ export const test = base.extend({
 
             const homePage = new HomePage(page);
 
-		await homePage.open();
-        await homePage.clickCatalogBlackBtn();
+            await homePage.open();
+            await homePage.clickCatalogBlackBtn();
 
             const catalogPage = new CatalogPage(page);
-            await catalogPage.clickJacketProduct();
+            await catalogPage.clickJacketBasic();
             await page.waitForTimeout(2000);
             const jacketPage = new QuiltedJacketPage(page);
-            await jacketPage.clickSizeButton();
-            await jacketPage. clickCartButton();
+            await jacketPage.clickSizeLButton();
+            await jacketPage.clickCartButton();
             const madalWindowPage = new PopupShoppingCartWndowPage(page)
             await madalWindowPage.clickCheckoutButton();
             await page.waitForTimeout(2000);
@@ -35,17 +36,41 @@ export const test = base.extend({
         { scope: "test" },
     ],
 
-	 openProductCart: [
-		async ({ page }, use) => {
+    openProductCart: [
+        async ({ page }, use) => {
 
 
-			 const homePage = new HomePage(page);
-	 		 await homePage.open();
-			 await homePage.clickOpenProductCart();
+            const homePage = new HomePage(page);
+            await homePage.open();
+            await homePage.clickOpenProductCart();
 
-			 await use("");
-		},
-		{ scope: "test" },
-  ]
+            await use("");
+        },
+        { scope: "test" },
+    ],
+
+    productInCart: [
+        async ({ page }, use) => {
+
+
+            const homePage = new HomePage(page);
+            await homePage.open();
+            await homePage.clickCatalogBlackBtn();
+
+            const catalogPage = new CatalogPage(page);
+            await catalogPage.clickJacketBasic();
+            await page.waitForTimeout(2000);
+            const jacketPage = new QuiltedJacketPage(page);
+            await jacketPage.clickSizeLButton();
+            await jacketPage.clickCartButton();
+
+            await use("");
+        },
+        { scope: "test" },
+    ],
+
+
+
+
 
 })

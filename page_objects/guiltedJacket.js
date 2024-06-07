@@ -11,12 +11,19 @@ class QuiltedJacketPage {
 
 		getSizeButton: () => this.page.getByRole('button', { name: 'S' }),
 		getCartButton: () => this.page.getByRole('button', { name: 'Додати в кошик' }),
+		getSizeLButton: () => this.page.getByRole('button', { name: 'L' })
+
 
 
     }
 
 	async clickSizeButton() {
 		await this.locators.getSizeButton().click();
+
+	}
+
+	async clickSizeLButton() {
+		await this.locators.getSizeLButton().click();
 
 	}
 
