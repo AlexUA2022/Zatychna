@@ -30,7 +30,11 @@ class CatalogPage {
 		getLastPagePangination: () => this.page.getByRole('button', { name: '8' }),
 		getBackPagesForward: () => this.page.locator('.sc-dxfSRF').first(),
 		getJacketProduct: () => this.page.getByRole('link', { name: 'Куртка Quilted з капюшоно...' }),
-		getFooterGolovnaBtn: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Головна' })
+		getFooterGolovnaBtn: () => this.page.getByRole('contentinfo').getByRole('link', { name: 'Головна' }),
+		getINSPOTshirtsItem: () => this.page.getByRole('link', { name: 'Футболка оверсайз з вишит...' }).nth(2),
+		getNotAvailableItemText: () => this.page.getByText('Немає в наявності'),
+		getAddToCartBtn: () => this.page.getByRole('button', { name: 'Додати в кошик' }),
+		getGolovnaBreadcrumbs: () => this.page.getByRole('main').getByRole('link', { name: 'Головна' })
 	};
 
 	async clickDropdownSorting() {
@@ -64,6 +68,23 @@ class CatalogPage {
 		await this.locators.getFooterGolovnaBtn().click();
 		return new HomePage(this.page);
 	}
+
+	async clickTshirtsBtn() {
+		await this.locators.getTshirtsBtn().click();
+		return this
+	}
+
+	async clickINSPOTshirtsItem() {
+		await this.locators.getINSPOTshirtsItem().click();
+		return this
+	}
+
+	async clickGolovnaBreadcrumbs() {
+		await this.locators.getGolovnaBreadcrumbs().click();
+		return new HomePage(this.page);
+	}
+
+
 
 }
 
