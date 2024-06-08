@@ -5,7 +5,7 @@ import { test, openProductCart } from "../../fixtures/base.js";
 import ProductPage from "../../page_objects/productPage.js";
 
 
-test.describe('productPage.spec.spec', () => {
+test.describe('productPage.spec', () => {
 
 	test('ТС 03.01.1 Verify that the product name is displayed in the product card', async ({ page, openProductCart }) => {
 		const productPage = new ProductPage(page);

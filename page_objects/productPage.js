@@ -1,4 +1,5 @@
 import CatalogPage from "./catalogPage";
+import CartPage from "./cartPage";
 
 class ProductPage {
 	constructor(page) {
@@ -50,6 +51,7 @@ class ProductPage {
 		getCatalogPage: () => this.page.getByRole('banner').getByRole('link', { name: 'Каталог' }),
 		getBreadcrumbs: () => this.page.getByText('ГоловнаКаталогФутболки'),
 		getCatalogBreadcrumbs: () => this.page.getByRole('main').getByRole('link', { name: 'Каталог' }),
+		getCartBtn: () => this.page.getByRole('link', { name: '1 Кошик' })
 	};
 
 	async clickDimensionalGridLink() {
@@ -95,6 +97,11 @@ class ProductPage {
 	async clickCatalogBreadcrumbs() {
 		await this.locators.getCatalogBreadcrumbs().click();
 		return new CatalogPage(this.page);
+	}
+
+	async clickCartBtn() {
+		await this.locators.getCartBtn().click();
+		return new CartPage(this.page);
 	}
 
 }
