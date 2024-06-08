@@ -70,5 +70,71 @@ test.describe('cartPage.spec', () => {
 		
 	});
 
+	test('ТС 05.01.8 Verify that the quantity button displays the correct number of selected products', async ({ page, productInTheShoppingCart }) => {
+		const cartPage = new CartPage(page);
+
+		await expect(cartPage.locators.getQuantityCart()).toBeVisible();
+		await expect(cartPage.locators.getQuantityCart()).toHaveText('1');
+
+		await expect(cartPage.locators.getQuantityBtn()).toBeVisible();
+		await expect(cartPage.locators.getQuantityBtn()).toHaveText('1');
+		
+	});
+
+	test('ТС 05.01.9 Verify that the quantity button includes the " + " button for adding products', async ({ page, productInTheShoppingCart }) => {
+		const cartPage = new CartPage(page);
+
+		await expect(cartPage.locators.getQuantityAddBtn()).toBeVisible();
+		
+	});
+
+	test('ТС 05.01.10 Verify that the " + " button for adding products has a pointer cursor', async ({ page, productInTheShoppingCart }) => {
+		const cartPage = new CartPage(page);
+
+		await expect(cartPage.locators.getQuantityAddBtn()).toBeVisible();
+		await expect(cartPage.locators.getQuantityAddBtn()).toHaveCSS('cursor', 'pointer');
+		
+	});
+
+	test('ТС 05.01.11 Verify that the number of products increases after clicking the " + "button for adding products', async ({ page, productInTheShoppingCart }) => {
+		const cartPage = new CartPage(page);
+
+		await cartPage.clickQuantityAddBtn();
+
+		await expect(cartPage.locators.getQuantityBtn2()).toBeVisible();
+		await expect(cartPage.locators.getQuantityBtn2()).toHaveText('2');
+		
+	});
+
+	test('ТС 05.01.12 Verify that the quantity button includes the " - " button for decreasing products', async ({ page, productInTheShoppingCart }) => {
+		const cartPage = new CartPage(page);
+
+		await expect(cartPage.locators.getQuantityDecrBtn()).toBeVisible();
+		
+	});
+
+	test('ТС 05.01.13 Verify that the " - " button for decreasing products has a pointer cursor', async ({ page, productInTheShoppingCart }) => {
+		const cartPage = new CartPage(page);
+
+		await expect(cartPage.locators.getQuantityDecrBtn()).toBeVisible();
+		await expect(cartPage.locators.getQuantityDecrBtn()).toHaveCSS('cursor', 'pointer');
+		
+	});
+
+	test('ТС 05.01.14 Verify that the number of products decreases after clicking the " - " button for decreasing products', async ({ page, productInTheShoppingCart }) => {
+		const cartPage = new CartPage(page);
+
+		await cartPage.clickQuantityAddBtn();
+
+		await expect(cartPage.locators.getQuantityBtn2()).toBeVisible();
+		await expect(cartPage.locators.getQuantityBtn2()).toHaveText('2');
+
+		await cartPage.clickQuantityDecrBtn();
+
+		await expect(cartPage.locators.getQuantityBtn()).toBeVisible();
+		await expect(cartPage.locators.getQuantityBtn()).toHaveText('1');
+
+	});
+
 
 })
