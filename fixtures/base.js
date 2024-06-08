@@ -3,12 +3,6 @@ import CatalogPage from "../page_objects/catalogPage";
 import PopupShoppingCartWndowPage from "../page_objects/pop-upShoppingCartWndow";
 import QuiltedJacketPage from "../page_objects/guiltedJacket";
 import HomePage from "../page_objects/homePage";
-import OrderPage from "../page_objects/orderPage";
-
-
-
-
-
 
 
 export const test = base.extend({
@@ -69,8 +63,21 @@ export const test = base.extend({
         { scope: "test" },
     ],
 
+	 productInTheShoppingCart: [
+		async ({ page }, use) => {
 
 
+			 const homePage = new HomePage(page);
+			 await homePage.open();
+			 const productPage = await homePage.clickOpenProductCart();
+			 await productPage.clickSizeSelectionBlockBtn();
+			 await productPage.clickAddToCartBtn();
+			 await productPage.clickCartBtn();
 
+
+			 await use("");
+		},
+		{ scope: "test" },
+  ],
 
 })
