@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { CART_BREADCRUMBS_TEXT, CART_URL, LIST_HEADERS, PRODUCT_NAME_TEXT, PRODUCT_SIZE_TEXT, PRODUCT_COLOR_TEXT, PRODUCT_PRICE_TEXT, MESSAGE_TEXT, MESSAGE_LINK_TEXT, CATALOG_PAGE_BREADCRUMBS_TEXT, CATALOG_URL } from "../../helpers/testDataCartPage.js";
+import { CART_BREADCRUMBS_TEXT, CART_URL, LIST_HEADERS, PRODUCT_NAME_TEXT, PRODUCT_SIZE_TEXT, PRODUCT_COLOR_TEXT, PRODUCT_PRICE_TEXT, MESSAGE_TEXT, MESSAGE_LINK_TEXT, CATALOG_PAGE_BREADCRUMBS_TEXT, CATALOG_URL, CLEAN_CART_LINK_TEXT, TOTAL_PURCHASE_AMOUNT_TEXT, RAZOM_HEADER_TEXT, TOTAL_PURCHASE_AMOUNT_X2_TEXT } from "../../helpers/testDataCartPage.js";
 import { test, productInTheShoppingCart } from "../../fixtures/base.js";
 import CartPage from "../../page_objects/cartPage.js";
 
@@ -202,6 +202,70 @@ test.describe('cartPage.spec', () => {
 		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toBeVisible();
 		await expect(catalogPage.locators.getCatalogBreadcrumbs()).toHaveText(CATALOG_PAGE_BREADCRUMBS_TEXT);
 
+	});
+
+	test('ТС 05.01.22 Verify that the cart page contains the "Очистити кошик" link', async ({ page, productInTheShoppingCart }) => {
+		const cartPage = new CartPage(page);
+
+		await expect(cartPage.locators.getCleanCartLink()).toBeVisible();
+		
+		await expect(cartPage.locators.getCleanCartLink()).toHaveText(CLEAN_CART_LINK_TEXT);
+
+	});
+
+	test('ТС 05.01.23 Verify that the "Очистити кошик" link has a pointer cursor', async ({ page, productInTheShoppingCart }) => {
+		const cartPage = new CartPage(page);
+
+		await expect(cartPage.locators.getCleanCartLink()).toBeVisible();
+		
+		await expect(cartPage.locators.getCleanCartLink()).toHaveCSS('cursor', 'pointer');
+
+	});
+
+	test('ТС 05.01.24 Verify that the selected product block closes after clicking on the "Очистити кошик" link and the "Ваш кошик порожній. Повернутися до покупок" message appears', async ({ page, productInTheShoppingCart }) => {
+		const cartPage = new CartPage(page);
+
+		await cartPage.clickCleanCartLink();
+
+		await expect(cartPage.locators.getMessage()).toBeVisible();
+		await expect(cartPage.locators.getMessage()).toHaveText(MESSAGE_TEXT);
+		
+	});
+
+	test('ТС 05.01.25 Verify that the cart page contains the information block', async ({ page, productInTheShoppingCart }) => {
+		const cartPage = new CartPage(page);
+
+		await expect(cartPage.locators.getInformationBlock()).toBeVisible();
+		
+	});
+
+	test('ТС 05.01.26 Verify that the information block contains "Разом" line', async ({ page, productInTheShoppingCart }) => {
+		const cartPage = new CartPage(page);
+
+		await expect(cartPage.locators.getRazomLine()).toBeVisible();
+		await expect(cartPage.locators.getRazomLineHeader()).toBeVisible();
+		await expect(cartPage.locators.getRazomLineHeader()).toHaveText(RAZOM_HEADER_TEXT);
+		
+	});
+
+	test('ТС 05.01.27 Verify that the "Разом" line contains total purchase amount', async ({ page, productInTheShoppingCart }) => {
+		const cartPage = new CartPage(page);
+
+		await expect(cartPage.locators.getRazomTotalPurchaseAmount()).toBeVisible();
+		await expect(cartPage.locators.getRazomTotalPurchaseAmount()).toHaveText(TOTAL_PURCHASE_AMOUNT_TEXT);
+		
+	});
+
+	test('ТС 05.01.28 Verify that the total purchase amount is calculated correctly (quantity * unit price)', async ({ page, productInTheShoppingCart }) => {
+		const cartPage = new CartPage(page);
+
+		await expect(cartPage.locators.getRazomTotalPurchaseAmount()).toBeVisible();
+	
+		await cartPage.clickQuantityAddBtn();
+
+		await expect(cartPage.locators.getRazomTotalPurchaseAmountX2()).toBeVisible();
+		await expect(cartPage.locators.getRazomTotalPurchaseAmountX2()).toHaveText(TOTAL_PURCHASE_AMOUNT_X2_TEXT);
+  
 	});
 
 })

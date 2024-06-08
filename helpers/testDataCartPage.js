@@ -16,4 +16,8 @@ export const PRODUCT_PRICE_TEXT = '650 UAH';
 export const MESSAGE_TEXT = 'Ваш кошик порожній.Повернутися до покупок';
 export const MESSAGE_LINK_TEXT = 'Повернутися до покупок';
 export const CATALOG_PAGE_BREADCRUMBS_TEXT = 'Каталог';
+export const CLEAN_CART_LINK_TEXT = 'Очистити кошик';
+export const RAZOM_HEADER_TEXT = 'Разом';
+export const TOTAL_PURCHASE_AMOUNT_TEXT = '650 UAH';
+export const TOTAL_PURCHASE_AMOUNT_X2_TEXT = '1 300 UAH';
 
