@@ -1,13 +1,13 @@
 {
-  "name": "zatychna",
+  "name": "zatyshna",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test --ui "
+    "test": "npx playwright test --ui"
   },
   "keywords": [],
-  "author": "Alexander",
+  "author": "Alexandr",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.44.1",
